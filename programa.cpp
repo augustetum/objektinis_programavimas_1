@@ -27,17 +27,17 @@ int main(){
             studentuSarasas.push_back(stud);
     }
 
-    cout << "Pavardė \t Vardas \t Galutinis (Vid.)" << endl;
+    cout << std::left << std::setw(20) << "Pavardė" << std::setw(20) << "Vardas" << std::setw(20) << "Galutinis (Vid.)" << endl;
     cout << "-------------------------------------" << endl;
     for (Studentas s : studentuSarasas){
-        cout << s.pavarde << "\t" << s.vardas << "\t" << skaiciuotiGalutini(s) << endl;
+        cout << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << skaiciuotiGalutini(s) << endl;
     }
 
 }
 
 double skaiciuotiGalutini(Studentas stud){
     int sum = accumulate(stud.pazymiai.begin(), stud.pazymiai.end(),0);
-    double pazymiuVidurkis = sum / stud.pazymiai.size();
+    double pazymiuVidurkis = sum / (double)stud.pazymiai.size(); //pataisyta
     double galutinis = 0.4 * pazymiuVidurkis + 0.6 * stud.egzaminas;
     return galutinis;
 }
