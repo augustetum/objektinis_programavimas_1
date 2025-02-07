@@ -2,18 +2,23 @@
 
 int main(){
     Studentas stud;
-    do {
+    while (true){
             cout << "Įveskite studento vardą (norėdami sustabdyti programą rašykite stop)" << endl;
             cin >> stud.vardas;
-            cout << "Įveskite studento pavardę";
+            if (stud.vardas == "stop"){
+                break;
+            }
+            cout << "Įveskite studento pavardę" << endl;
             cin >> stud.pavarde;
-            cout << "Įveskite studento namų darbų pažymius (baigę įveskite -1)";
+            cout << "Įveskite studento namų darbų pažymius (baigę įveskite -1)" << endl;
             int input;
-            while (input > 0){
+            while (true){
                 cin >> input;
+                if (input == -1)
+                break;
                 stud.pazymiai.push_back(input);
             }
-            cout << "Įveskite studento egzamino pažymį";
+            cout << "Įveskite studento egzamino pažymį" <<endl;
             cin >> stud.egzaminas;
-    } while (stud.vardas != "stop");
+    }
 }
