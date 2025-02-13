@@ -1,8 +1,10 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
+#include <fstream>
 #include <string>
 #include <numeric>
+#include <ctime>
 
 using std::cout;
 using std::cin;
@@ -10,6 +12,7 @@ using std::string;
 using std::vector;
 using std::endl;
 using std::accumulate;
+using std::ifstream;
 
 struct Studentas{
     string vardas, pavarde;
