@@ -1,5 +1,32 @@
 #include "mano_lib.h"
 
+void rodytiRezultatus(vector<Studentas> studentuSarasas){
+    int choice;
+    cout << "Jei norėtumete galutinį balą skaičiuoti su vidurkiu, įrašykite 0, jei su mediana - įrašykite 1";
+    cin >> choice;
+
+    cout << "Štai rezultatai: " << endl;
+    cout << endl;
+
+    cout << std::left << std::setw(20) << "Pavardė" << std::setw(20) << "Vardas";
+
+    if (choice == 0){
+        cout << std::setw(20) << "Galutinis (Vid.)" << endl;
+        cout << "---------------------------------------------------------" << endl;
+        for (Studentas s : studentuSarasas){
+            cout << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << skaiciuotiGalutiniSuVidurkiu(s) << endl;
+        }
+    } else if (choice == 1){
+        cout << std::setw(20) << "Galutinis (Med.)" << endl;
+        cout << "---------------------------------------------------------" << endl;
+        for (Studentas s : studentuSarasas){
+            cout << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << skaiciuotiGalutiniSuVidurkiu(s) << endl;
+        }
+        } else {
+            cout << "Neteisingai įvestas pasirinkimas";
+        }
+}
+
 int main(){
     vector<Studentas> studentuSarasas;
     int menuChoice;
@@ -42,30 +69,7 @@ int main(){
                     studentuSarasas.push_back(stud);
                     }
 
-                    int choice;
-                    cout << "Jei norėtumete galutinį balą skaičiuoti su vidurkiu, įrašykite 0, jei su mediana - įrašykite 1";
-                    cin >> choice;
-
-                    cout << "Štai rezultatai: " << endl;
-                    cout << endl;
-
-                    cout << std::left << std::setw(20) << "Pavardė" << std::setw(20) << "Vardas";
-
-                    if (choice == 0){
-                        cout << std::setw(20) << "Galutinis (Vid.)" << endl;
-                        cout << "---------------------------------------------------------" << endl;
-                        for (Studentas s : studentuSarasas){
-                            cout << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << skaiciuotiGalutiniSuVidurkiu(s) << endl;
-                        }
-                    } else if (choice == 1){
-                        cout << std::setw(20) << "Galutinis (Med.)" << endl;
-                        cout << "---------------------------------------------------------" << endl;
-                        for (Studentas s : studentuSarasas){
-                            cout << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << skaiciuotiGalutiniSuVidurkiu(s) << endl;
-                        }
-                    } else {
-                        cout << "Neteisingai įvestas pasirinkimas";
-                    }
+                    rodytiRezultatus(studentuSarasas);
 
                 break;
 
@@ -83,9 +87,23 @@ int main(){
                     cout << "Įveskite studento pavardę" << endl;
                     cin >> stud.pavarde;
 
+                    studentuSarasas.push_back(stud);
                 }
 
-            // generuoti pazymius
+                srand(time(NULL));
+
+                for (Studentas &s : studentuSarasas){
+                    int pazymiuKiekis = 3 + (rand() % 18);
+                    for (int x = 0; x < pazymiuKiekis; x++){
+                        int pazymys = 1 + (rand() % 10);
+                        s.pazymiai.push_back(pazymys);
+                    }
+                    int egzPazymys = 1 + (rand() % 10);
+                    s.egzaminas = egzPazymys;
+                }
+
+                rodytiRezultatus(studentuSarasas);
+
                 break;
 
             case 3:
