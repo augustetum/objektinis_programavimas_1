@@ -16,7 +16,7 @@ using std::ifstream;
 
 struct Studentas{
     string vardas, pavarde;
-    vector<int> pazymiai;
+    int* pazymiai;
     int egzaminas;
 };
 
@@ -25,3 +25,4 @@ double skaiciuotiGalutiniSuMediana(Studentas stud);
 void rodytiRezultatus(vector<Studentas> studentuSarasas);
 void generuotiPazymius(vector<Studentas> &studentuSarasas);
 void generuotiStudentus(vector<Studentas> &studentuSarasas);
+void atlaisvintiAtminti(vector<Studentas> &studentuSarasas);
