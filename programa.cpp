@@ -2,7 +2,7 @@
 
 void rodytiRezultatus(vector<Studentas> studentuSarasas){
     int choice;
-    cout << "Jei norėtumete galutinį balą skaičiuoti su vidurkiu, įrašykite 0, jei su mediana - įrašykite 1";
+    cout << "Jei norėtumete galutinį balą skaičiuoti su vidurkiu, įrašykite 0, jei su mediana - įrašykite 1" << endl;
     cin >> choice;
 
     cout << "Štai rezultatai: " << endl;
@@ -25,6 +25,51 @@ void rodytiRezultatus(vector<Studentas> studentuSarasas){
         } else {
             cout << "Neteisingai įvestas pasirinkimas";
         }
+}
+
+void generuotiPazymius(vector<Studentas> &studentuSarasas){
+    srand(time(NULL));
+    for (Studentas &s : studentuSarasas){
+        int pazymiuKiekis = 3 + (rand() % 18);
+        for (int x = 0; x < pazymiuKiekis; x++){
+            int pazymys = 1 + (rand() % 10);
+            s.pazymiai.push_back(pazymys);
+        }
+        int egzPazymys = 1 + (rand() % 10);
+        s.egzaminas = egzPazymys;
+    }
+}
+
+void generuotiStudentus(vector<Studentas> &studentuSarasas){
+    srand(time(NULL));
+
+    vector<string> vardai;
+    vector<string> pavardes;
+    string name;
+
+    ifstream varduFailas("firstNames.txt");
+    while(getline(varduFailas, name)){
+        vardai.push_back(name);
+    }
+    varduFailas.close();
+
+    ifstream pavardziuFailas("lastNames.txt");
+    while(getline(pavardziuFailas, name)){
+        pavardes.push_back(name);
+    }
+    pavardziuFailas.close();
+
+    int studentuSkaicius = 4 + (rand()%7);
+
+    for (int i = 0; i < studentuSkaicius; i++){
+        Studentas stud;
+        stud.vardas = vardai [rand() % vardai.size()];
+        stud.pavarde = pavardes [rand() % pavardes.size()];
+        studentuSarasas.push_back(stud);
+    }
+
+
+
 }
 
 int main(){
@@ -90,24 +135,17 @@ int main(){
                     studentuSarasas.push_back(stud);
                 }
 
-                srand(time(NULL));
-
-                for (Studentas &s : studentuSarasas){
-                    int pazymiuKiekis = 3 + (rand() % 18);
-                    for (int x = 0; x < pazymiuKiekis; x++){
-                        int pazymys = 1 + (rand() % 10);
-                        s.pazymiai.push_back(pazymys);
-                    }
-                    int egzPazymys = 1 + (rand() % 10);
-                    s.egzaminas = egzPazymys;
-                }
-
+                generuotiPazymius(studentuSarasas);
                 rodytiRezultatus(studentuSarasas);
 
                 break;
 
             case 3:
-            //generuoti pazymius ir studentu vardus 
+                cout << "Pasirinkote generuoti pažymius, studentų pavardes ir vardus" << endl;
+                cout << "---------------------------------" << endl;
+                generuotiStudentus(studentuSarasas);
+                generuotiPazymius(studentuSarasas);
+                rodytiRezultatus(studentuSarasas);
                 break;
 
             case 4:
