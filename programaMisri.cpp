@@ -11,7 +11,7 @@ double skaiciuotiGalutiniSuVidurkiu(Studentas stud){
 
 double skaiciuotiGalutiniSuMediana(Studentas stud){
     /*
-     int n = stud.pazymiai.size();
+    int n = stud.pazymiai.size();
     int med = 1;
     sort(stud.pazymiai.begin(), stud.pazymiai.end());
     if ( n % 2 != 0){
@@ -134,14 +134,23 @@ int main(){
                     cin >> stud.pavarde;
                     cout << "Įveskite studento namų darbų pažymius (baigę įveskite -1)" << endl;
                     int input;
+                    int count = 0;
+
+                    stud.pazymiai = nullptr; //pradzioj pointer rodo i null
+
                     while (true){
                         cin >> input;
                         if (input == -1)
                         break;
-                        /*
-                        stud.pazymiai.push_back(input);
-                        */
-            
+
+                        int* tempPazymiai = new int[count + 1]; //naujas (didesnis) dinaminis masyvas
+                        for (int x = 0; x < count; x++){
+                            tempPazymiai[x]=stud.pazymiai[x]; //nukopijuoja elementus
+                        }
+                        tempPazymiai[count] = input;
+                        delete[] stud.pazymiai;
+                        stud.pazymiai = tempPazymiai;
+                        count++;
                     }
                     cout << "Įveskite studento egzamino pažymį" << endl;
                     cin >> stud.egzaminas;
