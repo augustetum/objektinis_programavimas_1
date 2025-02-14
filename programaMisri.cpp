@@ -53,17 +53,16 @@ void generuotiPazymius(vector<Studentas> &studentuSarasas){
     srand(time(NULL));
 
      for (Studentas &s : studentuSarasas){
-        int pazymiuKiekis = 3 + (rand() % 18);
-        s.pazymiai = new int[pazymiuKiekis]; //pritaikyta C array
+        s.pazymiuKiekis = 3 + (rand() % 18);
+        s.pazymiai = new int[s.pazymiuKiekis]; 
 
-        for (int x = 0; x < pazymiuKiekis; x++){
-            int pazymys = 1 + (rand() % 10);
-            s.pazymiai[x] = pazymys;
+        for (int x = 0; x < s.pazymiuKiekis; x++){
+            s.pazymiai[x] = 1 + (rand() % 10); 
         }
-
-        int egzPazymys = 1 + (rand() % 10);
-        s.egzaminas = egzPazymys;
+        
+        s.egzaminas = 1 + (rand() % 10);
     }
+     
 }
 
 void generuotiStudentus(vector<Studentas> &studentuSarasas){
