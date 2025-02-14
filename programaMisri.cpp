@@ -1,19 +1,16 @@
 #include "misri_lib.h"
 
 double skaiciuotiGalutiniSuVidurkiu(Studentas stud){
-    /*
-    double sum = accumulate(stud.pazymiai.begin(), stud.pazymiai.end(),0);
-    double pazymiuVidurkis = sum / (double)stud.pazymiai.size();
+    double sum = accumulate(stud.pazymiai, stud.pazymiai + stud.pazymiuKiekis, 0);
+    double pazymiuVidurkis = sum / (double)stud.pazymiuKiekis;
     double galutinis = 0.4 * pazymiuVidurkis + 0.6 * stud.egzaminas;
     return galutinis;
-    */
 }
 
 double skaiciuotiGalutiniSuMediana(Studentas stud){
-    /*
-    int n = stud.pazymiai.size();
+    int n = stud.pazymiuKiekis;
     int med = 1;
-    sort(stud.pazymiai.begin(), stud.pazymiai.end());
+    std::sort(stud.pazymiai, stud.pazymiai + stud.pazymiuKiekis);
     if ( n % 2 != 0){
         med = (double)stud.pazymiai[n/2];
     } else {
@@ -22,7 +19,6 @@ double skaiciuotiGalutiniSuMediana(Studentas stud){
 
     double galutinis = 0.4 * med + 0.6 * stud.egzaminas;
     return galutinis;
-     */
 }
 
 void rodytiRezultatus(vector<Studentas> studentuSarasas){
@@ -47,9 +43,10 @@ void rodytiRezultatus(vector<Studentas> studentuSarasas){
         for (Studentas s : studentuSarasas){
             cout << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << skaiciuotiGalutiniSuVidurkiu(s) << endl;
         }
-        } else {
+    } else {
             cout << "Neteisingai įvestas pasirinkimas";
-        }
+    }
+
 }
 
 void generuotiPazymius(vector<Studentas> &studentuSarasas){
@@ -152,6 +149,8 @@ int main(){
                         stud.pazymiai = tempPazymiai;
                         count++;
                     }
+                    stud.pazymiuKiekis = count;
+
                     cout << "Įveskite studento egzamino pažymį" << endl;
                     cin >> stud.egzaminas;
 

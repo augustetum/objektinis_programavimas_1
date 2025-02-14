@@ -18,6 +18,7 @@ struct Studentas{
     string vardas, pavarde;
     int* pazymiai;
     int egzaminas;
+    int pazymiuKiekis;
 };
 
 double skaiciuotiGalutiniSuVidurkiu(Studentas stud);
