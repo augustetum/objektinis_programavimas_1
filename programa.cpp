@@ -100,7 +100,8 @@ int main(){
     cout << "1 | Įvesti studentus ranka" << endl;
     cout << "2 | Generuoti pažymius" << endl;
     cout << "3 | Generuoti pažymius bei studentų vardus, pavardes" << endl;
-    cout << "4 | Baigti darbą" << endl;
+    cout << "4 | Nuskaityti duomenis iš failo" << endl;
+    cout << "5 | Baigti darbą" << endl;
     cin >> menuChoice;
 
     if (menuChoice == 1 || menuChoice == 2 || menuChoice == 3 || menuChoice == 4){
@@ -170,6 +171,11 @@ int main(){
                 break;
 
             case 4:
+                cout << "Pasirinkote nuskaityti duomenis iš failo" << endl;
+                cout << "----------------------------------------" << endl;
+                break;
+
+            case 5:
                 cout << "Programa baigta" << endl;
                 break;
         }
