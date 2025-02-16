@@ -5,6 +5,7 @@
 #include <string>
 #include <numeric>
 #include <ctime>
+#include <sstream>
 
 using std::cout;
 using std::cin;
@@ -13,6 +14,7 @@ using std::vector;
 using std::endl;
 using std::accumulate;
 using std::ifstream;
+using std::istringstream;
 
 struct Studentas{
     string vardas, pavarde;

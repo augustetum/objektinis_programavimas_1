@@ -89,8 +89,28 @@ void generuotiStudentus(vector<Studentas> &studentuSarasas){
         studentuSarasas.push_back(stud);
     }
 
+}
 
+void skaitytiIsFailo(vector<Studentas> &studentuSarasas){
+    ifstream failas("studentai10000.txt");
+    string eilut;
+    int pazymys;
 
+    getline(failas, eilut);
+
+    while(getline(failas, eilut)){
+        Studentas stud;
+        istringstream eilute(eilut);
+        eilute >> stud.vardas >> stud.pavarde;
+        while(eilute >> pazymys){
+            stud.pazymiai.push_back(pazymys);
+        }
+
+        stud.egzaminas = stud.pazymiai.back();
+        stud.pazymiai.pop_back();
+
+        studentuSarasas.push_back(stud);
+    }
 }
 
 int main(){
@@ -173,7 +193,10 @@ int main(){
             case 4:
                 cout << "Pasirinkote nuskaityti duomenis iš failo" << endl;
                 cout << "----------------------------------------" << endl;
+                skaitytiIsFailo(studentuSarasas);
+                rodytiRezultatus(studentuSarasas);
                 break;
+
 
             case 5:
                 cout << "Programa baigta" << endl;
