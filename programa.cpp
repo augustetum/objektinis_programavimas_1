@@ -3,6 +3,7 @@
 int main(){
     vector<Studentas> studentuSarasas;
     int menuChoice;
+    int rikiavimas;
     cout << "Pasirinkite programos eigą:" << endl;
     cout << "1 | Įvesti studentus ranka" << endl;
     cout << "2 | Generuoti pažymius" << endl;
@@ -81,7 +82,26 @@ int main(){
                 cout << "Pasirinkote nuskaityti duomenis iš failo" << endl;
                 cout << "----------------------------------------" << endl;
                 skaitytiIsFailo(studentuSarasas);
-                rodytiVisusRezultatus(studentuSarasas);
+
+                cout << "Pasirinkite rikiavimo būdą: " << endl;
+                cout << "1 | Rikiuoti pagal vardą" << endl;
+                cout << "2 | Rikiuoti pagal pavardę" << endl;
+                cout << "3 | Rikiuoti pagal galutinį pažymį (su vidurkiu)" << endl;
+                cout << "4 | Rikiuoti pagal galutinį pažymį (su mediana)" << endl;
+                cout << "5 | Nerikiuoti" << endl;
+                cin >> rikiavimas;
+
+                if (rikiavimas == 1)
+                    rikiuotiPagalVarda(studentuSarasas);
+                if (rikiavimas == 2)
+                    rikiuotiPagalPavarde(studentuSarasas);
+                if (rikiavimas == 3)
+                    rikiuotiPagalGalutiniVid(studentuSarasas);
+                if (rikiavimas == 4)
+                    rikiuotiPagalGalutiniMed(studentuSarasas);
+                else
+                    cout << "Neteisingas meniu pasirinkimas" << endl;
+
                 break;
 
             case 5:
@@ -222,4 +242,19 @@ void skaitytiIsFailo(vector<Studentas> &studentuSarasas){
     }
 }
 
+void rikiuotiPagalVarda(vector<Studentas> studentuSarasas){
+    sort(studentuSarasas.begin(), studentuSarasas.end(), [](const Studentas& a, const Studentas& b) {
+        return a.vardas < b.vardas;
+    });
+
+    for (Studentas s : studentuSarasas){
+        cout << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisVid << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisMed << endl;
+    }
+}
+
+void rikiuotiPagalPavarde(vector<Studentas> studentuSarasas){}
+
+void rikiuotiPagalGalutiniMed(vector<Studentas> studentuSarasas){}
+
+void rikiuotiPagalGalutiniVid(vector<Studentas> studentuSarasas){}
 

@@ -31,3 +31,9 @@ void generuotiPazymius(vector<Studentas> &studentuSarasas);
 void generuotiStudentus(vector<Studentas> &studentuSarasas);
 void skaitytiIsFailo(vector<Studentas> &studentuSarasas);
 void rodytiVisusRezultatus(vector<Studentas> studentuSarasas);
+
+//rikiavimo funkcijos
+void rikiuotiPagalVarda(vector<Studentas> studentuSarasas);
+void rikiuotiPagalPavarde(vector<Studentas> studentuSarasas);
+void rikiuotiPagalGalutiniMed(vector<Studentas> studentuSarasas);
+void rikiuotiPagalGalutiniVid(vector<Studentas> studentuSarasas);
