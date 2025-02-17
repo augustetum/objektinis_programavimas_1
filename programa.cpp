@@ -1,118 +1,5 @@
 #include "mano_lib.h"
 
-double skaiciuotiGalutiniSuVidurkiu(Studentas stud){
-    double sum = accumulate(stud.pazymiai.begin(), stud.pazymiai.end(),0);
-    double pazymiuVidurkis = sum / (double)stud.pazymiai.size();
-    double galutinis = 0.4 * pazymiuVidurkis + 0.6 * stud.egzaminas;
-    return galutinis;
-}
-
-double skaiciuotiGalutiniSuMediana(Studentas stud){
-    int n = stud.pazymiai.size();
-    int med = 1;
-    sort(stud.pazymiai.begin(), stud.pazymiai.end());
-    if ( n % 2 != 0){
-        med = (double)stud.pazymiai[n/2];
-    } else {
-        med = (double)(stud.pazymiai[(n-1)/2] + stud.pazymiai[n/2]) / 2.0;
-    }
-
-    double galutinis = 0.4 * med + 0.6 * stud.egzaminas;
-    return galutinis;
-}
-
-void rodytiRezultatus(vector<Studentas> studentuSarasas){
-    int choice;
-    cout << "Jei norėtumete galutinį balą skaičiuoti su vidurkiu, įrašykite 0, jei su mediana - įrašykite 1" << endl;
-    cin >> choice;
-
-    cout << "Štai rezultatai: " << endl;
-    cout << endl;
-
-    cout << std::left << std::setw(20) << "Pavardė" << std::setw(20) << "Vardas";
-
-    if (choice == 0){
-        cout << std::setw(20) << "Galutinis (Vid.)" << endl;
-        cout << "---------------------------------------------------------" << endl;
-        for (Studentas s : studentuSarasas){
-            cout << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << skaiciuotiGalutiniSuVidurkiu(s) << endl;
-        }
-    } else if (choice == 1){
-        cout << std::setw(20) << "Galutinis (Med.)" << endl;
-        cout << "---------------------------------------------------------" << endl;
-        for (Studentas s : studentuSarasas){
-            cout << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << skaiciuotiGalutiniSuVidurkiu(s) << endl;
-        }
-        } else {
-            cout << "Neteisingai įvestas pasirinkimas";
-        }
-}
-
-void generuotiPazymius(vector<Studentas> &studentuSarasas){
-    srand(time(NULL));
-    for (Studentas &s : studentuSarasas){
-        int pazymiuKiekis = 3 + (rand() % 18);
-        for (int x = 0; x < pazymiuKiekis; x++){
-            int pazymys = 1 + (rand() % 10);
-            s.pazymiai.push_back(pazymys);
-        }
-        int egzPazymys = 1 + (rand() % 10);
-        s.egzaminas = egzPazymys;
-    }
-}
-
-void generuotiStudentus(vector<Studentas> &studentuSarasas){
-    srand(time(NULL));
-
-    vector<string> vardai;
-    vector<string> pavardes;
-    string name;
-
-    ifstream varduFailas("firstNames.txt");
-    while(getline(varduFailas, name)){
-        vardai.push_back(name);
-    }
-    varduFailas.close();
-
-    ifstream pavardziuFailas("lastNames.txt");
-    while(getline(pavardziuFailas, name)){
-        pavardes.push_back(name);
-    }
-    pavardziuFailas.close();
-
-    int studentuSkaicius = 4 + (rand()%7);
-
-    for (int i = 0; i < studentuSkaicius; i++){
-        Studentas stud;
-        stud.vardas = vardai [rand() % vardai.size()];
-        stud.pavarde = pavardes [rand() % pavardes.size()];
-        studentuSarasas.push_back(stud);
-    }
-
-}
-
-void skaitytiIsFailo(vector<Studentas> &studentuSarasas){
-    ifstream failas("studentai10000.txt");
-    string eilut;
-    int pazymys;
-
-    getline(failas, eilut);
-
-    while(getline(failas, eilut)){
-        Studentas stud;
-        istringstream eilute(eilut);
-        eilute >> stud.vardas >> stud.pavarde;
-        while(eilute >> pazymys){
-            stud.pazymiai.push_back(pazymys);
-        }
-
-        stud.egzaminas = stud.pazymiai.back();
-        stud.pazymiai.pop_back();
-
-        studentuSarasas.push_back(stud);
-    }
-}
-
 int main(){
     vector<Studentas> studentuSarasas;
     int menuChoice;
@@ -124,7 +11,7 @@ int main(){
     cout << "5 | Baigti darbą" << endl;
     cin >> menuChoice;
 
-    if (menuChoice == 1 || menuChoice == 2 || menuChoice == 3 || menuChoice == 4){
+    if (menuChoice == 1 || menuChoice == 2 || menuChoice == 3 || menuChoice == 4 || menuChoice == 5){
 
         switch(menuChoice) 
         {
@@ -194,9 +81,8 @@ int main(){
                 cout << "Pasirinkote nuskaityti duomenis iš failo" << endl;
                 cout << "----------------------------------------" << endl;
                 skaitytiIsFailo(studentuSarasas);
-                rodytiRezultatus(studentuSarasas);
+                rodytiVisusRezultatus(studentuSarasas);
                 break;
-
 
             case 5:
                 cout << "Programa baigta" << endl;
@@ -208,3 +94,132 @@ int main(){
 
 
 }
+
+void Studentas::skaiciuotiGalutiniSuVidurkiu(){
+    double sum = accumulate(pazymiai.begin(), pazymiai.end(),0);
+    double pazymiuVidurkis = sum / (double)pazymiai.size();
+    double galutinis = 0.4 * pazymiuVidurkis + 0.6 * egzaminas;
+    galutinisVid = galutinis;
+}
+
+void Studentas::skaiciuotiGalutiniSuMediana(){
+    int n = pazymiai.size();
+    int med = 1;
+    sort(pazymiai.begin(), pazymiai.end());
+    if ( n % 2 != 0){
+        med = (double)pazymiai[n/2];
+    } else {
+        med = (double)(pazymiai[(n-1)/2] + pazymiai[n/2]) / 2.0;
+    }
+
+    double galutinis = 0.4 * med + 0.6 * egzaminas;
+    galutinisMed = galutinis;
+}
+
+void rodytiRezultatus(vector<Studentas> studentuSarasas){
+    int choice;
+    cout << "Jei norėtumete galutinį balą skaičiuoti su vidurkiu, įrašykite 0, jei su mediana - įrašykite 1" << endl;
+    cin >> choice;
+
+    cout << "Štai rezultatai: " << endl;
+    cout << endl;
+
+    cout << std::left << std::setw(20) << "Pavardė" << std::setw(20) << "Vardas";
+
+    if (choice == 0){
+        cout << std::setw(20) << "Galutinis (Vid.)" << endl;
+        cout << "---------------------------------------------------------" << endl;
+        for (Studentas s : studentuSarasas){
+            s.skaiciuotiGalutiniSuVidurkiu();
+            cout << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisVid<< endl;
+        }
+    } else if (choice == 1){
+        cout << std::setw(20) << "Galutinis (Med.)" << endl;
+        cout << "---------------------------------------------------------" << endl;
+        for (Studentas s : studentuSarasas){
+            s.skaiciuotiGalutiniSuMediana();
+            cout << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisMed << endl;
+        }
+        } else {
+            cout << "Neteisingai įvestas pasirinkimas";
+        }
+}
+
+void rodytiVisusRezultatus(vector<Studentas> studentuSarasas){
+    for (Studentas s: studentuSarasas){
+        cout << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisVid << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisMed << endl;
+    }
+ }
+
+void generuotiPazymius(vector<Studentas> &studentuSarasas){
+    srand(time(NULL));
+    for (Studentas &s : studentuSarasas){
+        int pazymiuKiekis = 3 + (rand() % 18);
+        for (int x = 0; x < pazymiuKiekis; x++){
+            int pazymys = 1 + (rand() % 10);
+            s.pazymiai.push_back(pazymys);
+        }
+        int egzPazymys = 1 + (rand() % 10);
+        s.egzaminas = egzPazymys;
+        s.skaiciuotiGalutiniSuMediana();
+        s.skaiciuotiGalutiniSuVidurkiu();
+    }
+}
+
+void generuotiStudentus(vector<Studentas> &studentuSarasas){
+    srand(time(NULL));
+
+    vector<string> vardai;
+    vector<string> pavardes;
+    string name;
+
+    ifstream varduFailas("firstNames.txt");
+    while(getline(varduFailas, name)){
+        vardai.push_back(name);
+    }
+    varduFailas.close();
+
+    ifstream pavardziuFailas("lastNames.txt");
+    while(getline(pavardziuFailas, name)){
+        pavardes.push_back(name);
+    }
+    pavardziuFailas.close();
+
+    int studentuSkaicius = 4 + (rand()%7);
+
+    for (int i = 0; i < studentuSkaicius; i++){
+        Studentas stud;
+        stud.vardas = vardai [rand() % vardai.size()];
+        stud.pavarde = pavardes [rand() % pavardes.size()];
+        stud.skaiciuotiGalutiniSuMediana();
+        stud.skaiciuotiGalutiniSuVidurkiu();
+        studentuSarasas.push_back(stud);
+    }
+
+}
+
+void skaitytiIsFailo(vector<Studentas> &studentuSarasas){
+    ifstream failas("studentai10000.txt");
+    string eilut;
+    int pazymys;
+
+    getline(failas, eilut);
+
+    while(getline(failas, eilut)){
+        Studentas stud;
+        istringstream eilute(eilut);
+        eilute >> stud.vardas >> stud.pavarde;
+        while(eilute >> pazymys){
+            stud.pazymiai.push_back(pazymys);
+        }
+
+        stud.egzaminas = stud.pazymiai.back();
+        stud.pazymiai.pop_back();
+        stud.skaiciuotiGalutiniSuMediana();
+        stud.skaiciuotiGalutiniSuVidurkiu();
+
+        studentuSarasas.push_back(stud);
+    }
+}
+
+

@@ -6,6 +6,7 @@
 #include <numeric>
 #include <ctime>
 #include <sstream>
+#include <chrono>
 
 using std::cout;
 using std::cin;
@@ -20,10 +21,13 @@ struct Studentas{
     string vardas, pavarde;
     vector<int> pazymiai;
     int egzaminas;
+    double galutinisMed, galutinisVid, pazymiuVidurkis;
+    void skaiciuotiGalutiniSuVidurkiu();
+    void skaiciuotiGalutiniSuMediana();
 };
 
-double skaiciuotiGalutiniSuVidurkiu(Studentas stud);
-double skaiciuotiGalutiniSuMediana(Studentas stud);
 void rodytiRezultatus(vector<Studentas> studentuSarasas);
 void generuotiPazymius(vector<Studentas> &studentuSarasas);
 void generuotiStudentus(vector<Studentas> &studentuSarasas);
+void skaitytiIsFailo(vector<Studentas> &studentuSarasas);
+void rodytiVisusRezultatus(vector<Studentas> studentuSarasas);
