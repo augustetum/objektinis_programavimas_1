@@ -219,7 +219,7 @@ void generuotiStudentus(vector<Studentas> &studentuSarasas){
 }
 
 void skaitytiIsFailo(vector<Studentas> &studentuSarasas){
-    ifstream failas("studentai10000.txt");
+    ifstream failas("studentai.txt");
     string eilut;
     int pazymys;
 
@@ -247,14 +247,30 @@ void rikiuotiPagalVarda(vector<Studentas> studentuSarasas){
         return a.vardas < b.vardas;
     });
 
-    for (Studentas s : studentuSarasas){
-        cout << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisVid << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisMed << endl;
-    }
+    rodytiVisusRezultatus(studentuSarasas);
 }
 
-void rikiuotiPagalPavarde(vector<Studentas> studentuSarasas){}
+void rikiuotiPagalPavarde(vector<Studentas> studentuSarasas){
+    sort(studentuSarasas.begin(), studentuSarasas.end(), [](const Studentas& a, const Studentas& b) {
+        return a.pavarde < b.pavarde;
+    });
 
-void rikiuotiPagalGalutiniMed(vector<Studentas> studentuSarasas){}
+    rodytiVisusRezultatus(studentuSarasas);
+}
 
-void rikiuotiPagalGalutiniVid(vector<Studentas> studentuSarasas){}
+void rikiuotiPagalGalutiniMed(vector<Studentas> studentuSarasas){
+    sort(studentuSarasas.begin(), studentuSarasas.end(), [](const Studentas& a, const Studentas& b) {
+        return a.galutinisMed < b.galutinisMed;
+    });
+
+    rodytiVisusRezultatus(studentuSarasas);
+}
+
+void rikiuotiPagalGalutiniVid(vector<Studentas> studentuSarasas){
+    sort(studentuSarasas.begin(), studentuSarasas.end(), [](const Studentas& a, const Studentas& b) {
+        return a.galutinisVid < b.galutinisVid;
+    });
+
+    rodytiVisusRezultatus(studentuSarasas);
+}
 
