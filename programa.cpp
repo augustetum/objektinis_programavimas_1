@@ -81,7 +81,7 @@ int main(){
             case 4:
                 cout << "Pasirinkote nuskaityti duomenis iš failo" << endl;
                 cout << "----------------------------------------" << endl;
-                skaitytiIsFailo(studentuSarasas);
+                skaitytiIsFailoSuBuf(studentuSarasas);
 
                 cout << "Pasirinkite rikiavimo būdą: " << endl;
                 cout << "1 | Rikiuoti pagal vardą" << endl;
@@ -111,8 +111,6 @@ int main(){
     } else {
         cout << "Neteisingas meniu pasirinkimas" << endl;
     }
-
-
 }
 
 void Studentas::skaiciuotiGalutiniSuVidurkiu(){
@@ -219,12 +217,14 @@ void generuotiStudentus(vector<Studentas> &studentuSarasas){
 }
 
 void skaitytiIsFailo(vector<Studentas> &studentuSarasas){
-    ifstream failas("studentai.txt");
+    ifstream failas("studentai1000000.txt");
     string eilut;
     int pazymys;
 
     getline(failas, eilut);
 
+    
+    auto start = std::chrono::high_resolution_clock::now(); auto st=start;
     while(getline(failas, eilut)){
         Studentas stud;
         istringstream eilute(eilut);
@@ -240,6 +240,23 @@ void skaitytiIsFailo(vector<Studentas> &studentuSarasas){
 
         studentuSarasas.push_back(stud);
     }
+    std::chrono::duration<double> diff = std::chrono::high_resolution_clock::now()-start; 
+    std::cout << "Failo nuskaitymas užtruko: "<< diff.count() << " s\n";
+
+    failas.close();
+}
+
+void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas){
+    string eilut;
+    int pazymys;
+    std::stringstream buferis;
+    
+    auto start = std::chrono::high_resolution_clock::now(); auto st=start;
+    ifstream failas("studentai1000000.txt");
+    buferis << failas.rdbuf();
+    failas.close();
+    std::chrono::duration<double> diff = std::chrono::high_resolution_clock::now()-start; 
+    std::cout << "Failo nuskaitymas į buferį užtruko: "<< diff.count() << " s\n";
 }
 
 void rikiuotiPagalVarda(vector<Studentas> studentuSarasas){
