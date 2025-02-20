@@ -164,9 +164,11 @@ void rodytiRezultatus(vector<Studentas> studentuSarasas){
 }
 
 void rodytiVisusRezultatus(vector<Studentas> studentuSarasas){
+    std::ostringstream buferis;
     for (Studentas s: studentuSarasas){
-        cout << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisVid << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisMed << endl;
+        buferis << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisVid << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisMed << endl;
     }
+    cout << buferis.str();
  }
 
 void generuotiPazymius(vector<Studentas> &studentuSarasas){
@@ -252,7 +254,7 @@ void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas){
     std::stringstream buferis;
     
     auto start = std::chrono::high_resolution_clock::now(); auto st=start;
-    ifstream failas("studentai100000.txt");
+    ifstream failas("studentai1000000.txt");
     buferis << failas.rdbuf();
     failas.close();
 
@@ -280,6 +282,7 @@ void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas){
 }
 
 void rikiuotiPagalVarda(vector<Studentas> studentuSarasas){
+
     sort(studentuSarasas.begin(), studentuSarasas.end(), [](const Studentas& a, const Studentas& b) {
         return a.vardas < b.vardas;
     });
