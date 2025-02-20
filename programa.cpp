@@ -168,8 +168,22 @@ void rodytiVisusRezultatus(vector<Studentas> studentuSarasas){
     for (Studentas s: studentuSarasas){
         buferis << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisVid << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisMed << endl;
     }
-    cout << buferis.str();
- }
+
+    int choice;
+    cout << "Ar norėtumėte rezultatus matyti:" << endl;
+    cout << "1 | Komandinėje eilutėje" << endl;
+    cout << "2 | Faile" << endl;
+    cin >> choice;
+
+    if (choice == 1){
+        cout << buferis.str();
+    } else if (choice == 2){
+        std::ofstream failas("studentuRezultatai.txt");
+        failas << buferis.str();
+        failas.close();
+    }
+
+}
 
 void generuotiPazymius(vector<Studentas> &studentuSarasas){
     srand(time(NULL));
