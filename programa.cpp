@@ -252,11 +252,31 @@ void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas){
     std::stringstream buferis;
     
     auto start = std::chrono::high_resolution_clock::now(); auto st=start;
-    ifstream failas("studentai1000000.txt");
+    ifstream failas("studentai100000.txt");
     buferis << failas.rdbuf();
     failas.close();
+
+    getline(buferis, eilut);
+
+    while(getline(buferis, eilut)){
+        Studentas stud;
+        istringstream eilute(eilut);
+        eilute >> stud.vardas >> stud.pavarde;
+        while(eilute >> pazymys){
+            stud.pazymiai.push_back(pazymys);
+        }
+
+        stud.egzaminas = stud.pazymiai.back();
+        stud.pazymiai.pop_back();
+        stud.skaiciuotiGalutiniSuMediana();
+        stud.skaiciuotiGalutiniSuVidurkiu();
+
+        studentuSarasas.push_back(stud);
+    }
+
     std::chrono::duration<double> diff = std::chrono::high_resolution_clock::now()-start; 
-    std::cout << "Failo nuskaitymas į buferį užtruko: "<< diff.count() << " s\n";
+    std::cout << "Procesas užtruko: "<< diff.count() << " s\n";
+
 }
 
 void rikiuotiPagalVarda(vector<Studentas> studentuSarasas){
