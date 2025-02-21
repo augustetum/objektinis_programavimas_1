@@ -7,6 +7,7 @@
 #include <ctime>
 #include <sstream>
 #include <chrono>
+#include "timer.h"
 
 using std::cout;
 using std::cin;
@@ -32,7 +33,7 @@ void generuotiStudentus(vector<Studentas> &studentuSarasas);
 void skaitytiIsFailo(vector<Studentas> &studentuSarasas);
 void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas);
 void rodytiVisusRezultatus(vector<Studentas> studentuSarasas);
-void testuotiFailuNuskaityma(vector<Studentas> studentuSarasas);
+void testuotiFailuNuskaityma(vector<Studentas> studentuSarasas, int kartai);
 
 //rikiavimo funkcijos
 void rikiuotiPagalVarda(vector<Studentas> studentuSarasas);

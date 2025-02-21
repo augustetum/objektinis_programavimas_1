@@ -1,10 +1,9 @@
 #include "mano_lib.h"
-#include "timer.h"
 
 int main(){
     vector<Studentas> studentuSarasas;
     int menuChoice;
-    int rikiavimas;
+    
     cout << "Pasirinkite programos eigą:" << endl;
     cout << "1 | Įvesti studentus ranka" << endl;
     cout << "2 | Generuoti pažymius" << endl;
@@ -14,7 +13,7 @@ int main(){
     cout << "6 | Baigti darbą" << endl;
     cin >> menuChoice;
 
-    if (menuChoice == 1 || menuChoice == 2 || menuChoice == 3 || menuChoice == 4 || menuChoice == 5){
+    if (menuChoice == 1 || menuChoice == 2 || menuChoice == 3 || menuChoice == 4 || menuChoice == 5 || menuChoice == 6){
 
         switch(menuChoice) 
         {
@@ -85,6 +84,7 @@ int main(){
                 cout << "----------------------------------------" << endl;
                 skaitytiIsFailoSuBuf(studentuSarasas);
 
+                int rikiavimas;
                 cout << "Pasirinkite rikiavimo būdą: " << endl;
                 cout << "1 | Rikiuoti pagal vardą" << endl;
                 cout << "2 | Rikiuoti pagal pavardę" << endl;
@@ -111,7 +111,10 @@ int main(){
 
             case 5:
                 cout << "Pasirinkote testuoti programą" <<endl;
-                testuotiFailuNuskaityma(studentuSarasas);
+                int kartai;
+                cout << "Kiek kartų norite nuskaityti failą?" << endl;
+                cin >> kartai;
+                testuotiFailuNuskaityma(studentuSarasas, kartai);
                 break;
                 
             case 6:
@@ -121,291 +124,4 @@ int main(){
     } else {
         cout << "Neteisingas meniu pasirinkimas" << endl;
     }
-}
-
-void Studentas::skaiciuotiGalutiniSuVidurkiu(){
-    double sum = accumulate(pazymiai.begin(), pazymiai.end(),0);
-    double pazymiuVidurkis = sum / (double)pazymiai.size();
-    double galutinis = 0.4 * pazymiuVidurkis + 0.6 * egzaminas;
-    galutinisVid = galutinis;
-}
-
-void Studentas::skaiciuotiGalutiniSuMediana(){
-    int n = pazymiai.size();
-    int med = 1;
-    sort(pazymiai.begin(), pazymiai.end());
-    if ( n % 2 != 0){
-        med = (double)pazymiai[n/2];
-    } else {
-        med = (double)(pazymiai[(n-1)/2] + pazymiai[n/2]) / 2.0;
-    }
-
-    double galutinis = 0.4 * med + 0.6 * egzaminas;
-    galutinisMed = galutinis;
-}
-
-void rodytiRezultatus(vector<Studentas> studentuSarasas){
-    int choice;
-    cout << "Jei norėtumete galutinį balą skaičiuoti su vidurkiu, įrašykite 0, jei su mediana - įrašykite 1" << endl;
-    cin >> choice;
-
-    cout << "Štai rezultatai: " << endl;
-    cout << endl;
-
-    cout << std::left << std::setw(20) << "Pavardė" << std::setw(20) << "Vardas";
-
-    if (choice == 0){
-        cout << std::setw(20) << "Galutinis (Vid.)" << endl;
-        cout << "---------------------------------------------------------" << endl;
-        for (Studentas s : studentuSarasas){
-            s.skaiciuotiGalutiniSuVidurkiu();
-            cout << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisVid<< endl;
-        }
-    } else if (choice == 1){
-        cout << std::setw(20) << "Galutinis (Med.)" << endl;
-        cout << "---------------------------------------------------------" << endl;
-        for (Studentas s : studentuSarasas){
-            s.skaiciuotiGalutiniSuMediana();
-            cout << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisMed << endl;
-        }
-        } else {
-            cout << "Neteisingai įvestas pasirinkimas";
-        }
-}
-
-void rodytiVisusRezultatus(vector<Studentas> studentuSarasas){
-    std::ostringstream buferis;
-    buferis << std::left << std::setw(20) << "Pavardė" << std::setw(20) << "Vardas" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Vid.)" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Med.)" << endl;
-    for (Studentas s: studentuSarasas){
-        buferis << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisVid << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisMed << endl;
-    }
-
-    int choice;
-    cout << "Ar norėtumėte rezultatus matyti:" << endl;
-    cout << "1 | Komandinėje eilutėje" << endl;
-    cout << "2 | Faile" << endl;
-    cin >> choice;
-
-    if (choice == 1){
-        cout << buferis.str();
-    } else if (choice == 2){
-        Timer t;
-        std::ofstream failas("studentuRezultatai.txt");
-        failas << buferis.str();
-        failas.close();
-        cout << "Failą išvesti užtruko: " << t.elapsed() << " s\n";
-    }
-
-}
-
-void generuotiPazymius(vector<Studentas> &studentuSarasas){
-    srand(time(NULL));
-    for (Studentas &s : studentuSarasas){
-        int pazymiuKiekis = 3 + (rand() % 18);
-        for (int x = 0; x < pazymiuKiekis; x++){
-            int pazymys = 1 + (rand() % 10);
-            s.pazymiai.push_back(pazymys);
-        }
-        int egzPazymys = 1 + (rand() % 10);
-        s.egzaminas = egzPazymys;
-        s.skaiciuotiGalutiniSuMediana();
-        s.skaiciuotiGalutiniSuVidurkiu();
-    }
-}
-
-void generuotiStudentus(vector<Studentas> &studentuSarasas){
-    srand(time(NULL));
-
-    vector<string> vardai;
-    vector<string> pavardes;
-    string name;
-
-    ifstream varduFailas("firstNames.txt");
-    while(getline(varduFailas, name)){
-        vardai.push_back(name);
-    }
-    varduFailas.close();
-
-    ifstream pavardziuFailas("lastNames.txt");
-    while(getline(pavardziuFailas, name)){
-        pavardes.push_back(name);
-    }
-    pavardziuFailas.close();
-
-    int studentuSkaicius = 4 + (rand()%7);
-
-    for (int i = 0; i < studentuSkaicius; i++){
-        Studentas stud;
-        stud.vardas = vardai [rand() % vardai.size()];
-        stud.pavarde = pavardes [rand() % pavardes.size()];
-        stud.skaiciuotiGalutiniSuMediana();
-        stud.skaiciuotiGalutiniSuVidurkiu();
-        studentuSarasas.push_back(stud);
-    }
-
-}
-
-void skaitytiIsFailo(vector<Studentas> &studentuSarasas){
-    ifstream failas("studentai1000000.txt");
-    string eilut;
-    int pazymys;
-
-    getline(failas, eilut);
-
-    
-    auto start = std::chrono::high_resolution_clock::now(); auto st=start;
-    while(getline(failas, eilut)){
-        Studentas stud;
-        istringstream eilute(eilut);
-        eilute >> stud.vardas >> stud.pavarde;
-        while(eilute >> pazymys){
-            stud.pazymiai.push_back(pazymys);
-        }
-
-        stud.egzaminas = stud.pazymiai.back();
-        stud.pazymiai.pop_back();
-        stud.skaiciuotiGalutiniSuMediana();
-        stud.skaiciuotiGalutiniSuVidurkiu();
-
-        studentuSarasas.push_back(stud);
-    }
-    std::chrono::duration<double> diff = std::chrono::high_resolution_clock::now()-start; 
-    std::cout << "Failo nuskaitymas užtruko: "<< diff.count() << " s\n";
-
-    failas.close();
-}
-
-void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas){
-    string eilut;
-    int pazymys;
-    std::stringstream buferis;
-    
-    int choice;
-    cout << "Įveskite norimą studentų kiekį (10000, 100000 ar 1000000)" << endl;
-    cin >> choice;
-    string fail;
-    
-    if (choice == 10000){
-        fail = "studentai10000.txt";
-    } else if (choice == 100000) {
-        fail = "studentai100000.txt";
-    } else if (choice == 1000000) {
-        fail = "studentai1000000.txt";
-    } else {
-        cout << "Neteisingas meniu pasirinkimas";
-    }
-
-    ifstream failas(fail);
-    Timer t;
-    buferis << failas.rdbuf();
-    failas.close();
-
-    getline(buferis, eilut);
-
-    while(getline(buferis, eilut)){
-        Studentas stud;
-        istringstream eilute(eilut);
-        eilute >> stud.vardas >> stud.pavarde;
-        while(eilute >> pazymys){
-            stud.pazymiai.push_back(pazymys);
-        }
-
-        stud.egzaminas = stud.pazymiai.back();
-        stud.pazymiai.pop_back();
-        stud.skaiciuotiGalutiniSuMediana();
-        stud.skaiciuotiGalutiniSuVidurkiu();
-
-        studentuSarasas.push_back(stud);
-    }
-
-    std::cout << "Procesas užtruko: "<< t.elapsed() << " s\n";
-
-}
-
-void rikiuotiPagalVarda(vector<Studentas> studentuSarasas){
-
-    sort(studentuSarasas.begin(), studentuSarasas.end(), [](const Studentas& a, const Studentas& b) {
-        return a.vardas < b.vardas;
-    });
-
-    rodytiVisusRezultatus(studentuSarasas);
-}
-
-void rikiuotiPagalPavarde(vector<Studentas> studentuSarasas){
-    sort(studentuSarasas.begin(), studentuSarasas.end(), [](const Studentas& a, const Studentas& b) {
-        return a.pavarde < b.pavarde;
-    });
-
-    rodytiVisusRezultatus(studentuSarasas);
-}
-
-void rikiuotiPagalGalutiniMed(vector<Studentas> studentuSarasas){
-    sort(studentuSarasas.begin(), studentuSarasas.end(), [](const Studentas& a, const Studentas& b) {
-        return a.galutinisMed < b.galutinisMed;
-    });
-
-    rodytiVisusRezultatus(studentuSarasas);
-}
-
-void rikiuotiPagalGalutiniVid(vector<Studentas> studentuSarasas){
-    sort(studentuSarasas.begin(), studentuSarasas.end(), [](const Studentas& a, const Studentas& b) {
-        return a.galutinisVid < b.galutinisVid;
-    });
-
-    rodytiVisusRezultatus(studentuSarasas);
-}
-
-void testuotiFailuNuskaityma(vector<Studentas> studentuSarasas){
-     string eilut;
-    int pazymys;
-    double duration;
-    
-    int choice;
-    cout << "Įveskite norimą studentų kiekį (10000, 100000 ar 1000000)" << endl;
-    cin >> choice;
-    string fail;
-    Timer t;
-    
-    if (choice == 10000){
-        fail = "studentai10000.txt";
-    } else if (choice == 100000) {
-        fail = "studentai100000.txt";
-    } else if (choice == 1000000) {
-        fail = "studentai1000000.txt";
-    } else {
-        cout << "Neteisingas meniu pasirinkimas";
-    }
-
-    for (int x = 0; x < 3; x++){
-        ifstream failas(fail);
-        std::stringstream buferis;
-        studentuSarasas.clear();
-        t.reset();
-        buferis << failas.rdbuf();
-        failas.close();
-
-        getline(buferis, eilut);
-
-        while(getline(buferis, eilut)){
-            Studentas stud;
-            istringstream eilute(eilut);
-            eilute >> stud.vardas >> stud.pavarde;
-            while(eilute >> pazymys){
-                stud.pazymiai.push_back(pazymys);
-            }
-
-            stud.egzaminas = stud.pazymiai.back();
-            stud.pazymiai.pop_back();
-            stud.skaiciuotiGalutiniSuMediana();
-            stud.skaiciuotiGalutiniSuVidurkiu();
-
-            studentuSarasas.push_back(stud);
-        }
-        duration += t.elapsed();
-    }
-
-    double durationAvg = duration / 3.0;
-
-    std::cout << "Procesas vidutiniškai užtruko: "<< durationAvg << " s\n";
-
 }
