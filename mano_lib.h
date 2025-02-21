@@ -32,6 +32,7 @@ void generuotiStudentus(vector<Studentas> &studentuSarasas);
 void skaitytiIsFailo(vector<Studentas> &studentuSarasas);
 void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas);
 void rodytiVisusRezultatus(vector<Studentas> studentuSarasas);
+void testuotiFailuNuskaityma(vector<Studentas> studentuSarasas);
 
 //rikiavimo funkcijos
 void rikiuotiPagalVarda(vector<Studentas> studentuSarasas);

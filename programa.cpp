@@ -1,4 +1,5 @@
 #include "mano_lib.h"
+#include "timer.h"
 
 int main(){
     vector<Studentas> studentuSarasas;
@@ -9,7 +10,8 @@ int main(){
     cout << "2 | Generuoti pažymius" << endl;
     cout << "3 | Generuoti pažymius bei studentų vardus, pavardes" << endl;
     cout << "4 | Nuskaityti duomenis iš failo" << endl;
-    cout << "5 | Baigti darbą" << endl;
+    cout << "5 | Testuoti failų nuskaitymą" << endl;
+    cout << "6 | Baigti darbą" << endl;
     cin >> menuChoice;
 
     if (menuChoice == 1 || menuChoice == 2 || menuChoice == 3 || menuChoice == 4 || menuChoice == 5){
@@ -91,20 +93,28 @@ int main(){
                 cout << "5 | Nerikiuoti" << endl;
                 cin >> rikiavimas;
 
-                if (rikiavimas == 1)
+                if (rikiavimas == 1) {
                     rikiuotiPagalVarda(studentuSarasas);
-                if (rikiavimas == 2)
+                } else if (rikiavimas == 2) {
                     rikiuotiPagalPavarde(studentuSarasas);
-                if (rikiavimas == 3)
+                } else if (rikiavimas == 3) {
                     rikiuotiPagalGalutiniVid(studentuSarasas);
-                if (rikiavimas == 4)
+                } else if (rikiavimas == 4) {
                     rikiuotiPagalGalutiniMed(studentuSarasas);
-                else
+                } else if (rikiavimas == 5) {
+                    rodytiVisusRezultatus(studentuSarasas);
+                } else {
                     cout << "Neteisingas meniu pasirinkimas" << endl;
+                }
 
                 break;
 
             case 5:
+                cout << "Pasirinkote testuoti programą" <<endl;
+                testuotiFailuNuskaityma(studentuSarasas);
+                break;
+                
+            case 6:
                 cout << "Programa baigta" << endl;
                 break;
         }
@@ -165,6 +175,7 @@ void rodytiRezultatus(vector<Studentas> studentuSarasas){
 
 void rodytiVisusRezultatus(vector<Studentas> studentuSarasas){
     std::ostringstream buferis;
+    buferis << std::left << std::setw(20) << "Pavardė" << std::setw(20) << "Vardas" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Vid.)" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Med.)" << endl;
     for (Studentas s: studentuSarasas){
         buferis << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisVid << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisMed << endl;
     }
@@ -178,9 +189,11 @@ void rodytiVisusRezultatus(vector<Studentas> studentuSarasas){
     if (choice == 1){
         cout << buferis.str();
     } else if (choice == 2){
+        Timer t;
         std::ofstream failas("studentuRezultatai.txt");
         failas << buferis.str();
         failas.close();
+        cout << "Failą išvesti užtruko: " << t.elapsed() << " s\n";
     }
 
 }
@@ -267,8 +280,23 @@ void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas){
     int pazymys;
     std::stringstream buferis;
     
-    auto start = std::chrono::high_resolution_clock::now(); auto st=start;
-    ifstream failas("studentai1000000.txt");
+    int choice;
+    cout << "Įveskite norimą studentų kiekį (10000, 100000 ar 1000000)" << endl;
+    cin >> choice;
+    string fail;
+    
+    if (choice == 10000){
+        fail = "studentai10000.txt";
+    } else if (choice == 100000) {
+        fail = "studentai100000.txt";
+    } else if (choice == 1000000) {
+        fail = "studentai1000000.txt";
+    } else {
+        cout << "Neteisingas meniu pasirinkimas";
+    }
+
+    ifstream failas(fail);
+    Timer t;
     buferis << failas.rdbuf();
     failas.close();
 
@@ -290,8 +318,7 @@ void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas){
         studentuSarasas.push_back(stud);
     }
 
-    std::chrono::duration<double> diff = std::chrono::high_resolution_clock::now()-start; 
-    std::cout << "Procesas užtruko: "<< diff.count() << " s\n";
+    std::cout << "Procesas užtruko: "<< t.elapsed() << " s\n";
 
 }
 
@@ -328,3 +355,57 @@ void rikiuotiPagalGalutiniVid(vector<Studentas> studentuSarasas){
     rodytiVisusRezultatus(studentuSarasas);
 }
 
+void testuotiFailuNuskaityma(vector<Studentas> studentuSarasas){
+     string eilut;
+    int pazymys;
+    double duration;
+    
+    int choice;
+    cout << "Įveskite norimą studentų kiekį (10000, 100000 ar 1000000)" << endl;
+    cin >> choice;
+    string fail;
+    Timer t;
+    
+    if (choice == 10000){
+        fail = "studentai10000.txt";
+    } else if (choice == 100000) {
+        fail = "studentai100000.txt";
+    } else if (choice == 1000000) {
+        fail = "studentai1000000.txt";
+    } else {
+        cout << "Neteisingas meniu pasirinkimas";
+    }
+
+    for (int x = 0; x < 3; x++){
+        ifstream failas(fail);
+        std::stringstream buferis;
+        studentuSarasas.clear();
+        t.reset();
+        buferis << failas.rdbuf();
+        failas.close();
+
+        getline(buferis, eilut);
+
+        while(getline(buferis, eilut)){
+            Studentas stud;
+            istringstream eilute(eilut);
+            eilute >> stud.vardas >> stud.pavarde;
+            while(eilute >> pazymys){
+                stud.pazymiai.push_back(pazymys);
+            }
+
+            stud.egzaminas = stud.pazymiai.back();
+            stud.pazymiai.pop_back();
+            stud.skaiciuotiGalutiniSuMediana();
+            stud.skaiciuotiGalutiniSuVidurkiu();
+
+            studentuSarasas.push_back(stud);
+        }
+        duration += t.elapsed();
+    }
+
+    double durationAvg = duration / 3.0;
+
+    std::cout << "Procesas vidutiniškai užtruko: "<< durationAvg << " s\n";
+
+}
