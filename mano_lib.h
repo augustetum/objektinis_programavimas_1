@@ -7,6 +7,7 @@
 #include <ctime>
 #include <sstream>
 #include <chrono>
+#include <unordered_set>
 #include "timer.h"
 
 using std::cout;

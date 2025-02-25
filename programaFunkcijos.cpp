@@ -160,9 +160,12 @@ void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas){
     system("ls *.txt > temp.txt");
     ifstream tempFail("temp.txt");
     vector<string> failuPav;
+    std::unordered_set<string> nenorimiFailai = {"studentuRezultatai.txt", "firstNames.txt", "lastNames.txt"};
     string failoPav;
     while(getline(tempFail, failoPav)){
-        failuPav.push_back(failoPav);
+        if (nenorimiFailai.find(failoPav) == nenorimiFailai.end()) {
+            failuPav.push_back(failoPav);
+        }
     }
     tempFail.close();
     system("rm temp.txt");
