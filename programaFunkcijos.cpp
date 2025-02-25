@@ -157,20 +157,28 @@ void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas){
     int pazymys;
     std::stringstream buferis;
     
-    int choice;
-    cout << "Įveskite norimą studentų kiekį (10000, 100000 ar 1000000)" << endl;
-    cin >> choice;
-    string fail;
-    
-    if (choice == 10000){
-        fail = "studentai10000.txt";
-    } else if (choice == 100000) {
-        fail = "studentai100000.txt";
-    } else if (choice == 1000000) {
-        fail = "studentai1000000.txt";
-    } else {
-        cout << "Neteisingas meniu pasirinkimas";
+    system("ls *.txt > temp.txt");
+    ifstream tempFail("temp.txt");
+    vector<string> failuPav;
+    string failoPav;
+    while(getline(tempFail, failoPav)){
+        failuPav.push_back(failoPav);
     }
+    tempFail.close();
+    system("rm temp.txt");
+
+    cout << "Pasirinkite norimą failą" << endl;
+    for(int i = 1; i <= failuPav.size(); i++){
+        cout << i << "| " << failuPav[i-1] << endl;
+    }
+    int choice;
+    cin >> choice;
+    if (choice < 1 || choice > failuPav.size()) {
+        cout << "Neteisingas meniu pasirinkimas" << endl;
+        return;
+    }
+
+    string fail = failuPav[choice-1];
 
     ifstream failas(fail);
     Timer t;
@@ -233,7 +241,7 @@ void rikiuotiPagalGalutiniVid(vector<Studentas> studentuSarasas){
 }
 
 void testuotiFailuNuskaityma(vector<Studentas> studentuSarasas, int kartai){
-     string eilut;
+    string eilut;
     int pazymys;
     double duration;
     
@@ -281,7 +289,7 @@ void testuotiFailuNuskaityma(vector<Studentas> studentuSarasas, int kartai){
         duration += t.elapsed();
     }
 
-    double durationAvg = duration / 3.0;
+    double durationAvg = duration / kartai;
 
     std::cout << "Procesas vidutiniškai užtruko: "<< durationAvg << " s\n";
 
