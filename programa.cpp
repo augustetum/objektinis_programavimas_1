@@ -29,7 +29,6 @@ int main(){
             switch(menuChoice) 
             {
                 case 1:
-
                     cout << "Pasirinkote studentų įvestį ranka" << endl;
                     cout << "---------------------------------" << endl;
                     
@@ -50,13 +49,14 @@ int main(){
                                 throw std::runtime_error("Neteisinga pavardė! Pavardė turi būti sudaryta tik iš raidžių.");
                             }
                             cout << "Įveskite studento namų darbų pažymius (baigę įveskite -1)" << endl;
-                            int input;
                             while (true){
                                 try {
+                                    int input;
                                     cin >> input;
-                                    if (input == -1)
-                                    break;
-                                    if(cin.fail() || input < 1 || input > 10) {
+                                    if (input == -1){
+                                        break;
+                                    } 
+                                    if(cin.fail() || input < -1 || input > 10) {
                                         cin.clear();
                                         cin.ignore();
                                         throw std::runtime_error("Neteisingas pažymys! Pažymys susidaro tik iš skaičių, turi būti tarp 1 ir 10");
@@ -67,8 +67,17 @@ int main(){
                                     continue;
                                 }
                             }
-                            cout << "Įveskite studento egzamino pažymį" << endl;
-                            cin >> stud.egzaminas;
+                            while (true) {
+                                int input;
+                                cout << "Įveskite studento egzamino pažymį" << endl;
+                                cin >> stud.egzaminas;
+                                if(cin.fail() || input < 1 || input > 10) {
+                                    cin.clear();
+                                    cin.ignore();
+                                    throw std::runtime_error("Neteisingas egzamino pažymys! Pažymys susidaro tik iš skaičių, turi būti tarp 1 ir 10");
+                                }
+                                break;
+                            }
 
                             studentuSarasas.push_back(stud);
                         } catch (const std::runtime_error &e){
