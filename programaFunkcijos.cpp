@@ -1,20 +1,28 @@
 #include "mano_lib.h"
 
 void Studentas::skaiciuotiGalutiniSuVidurkiu(){
-    double sum = accumulate(pazymiai.begin(), pazymiai.end(),0);
-    double pazymiuVidurkis = sum / (double)pazymiai.size();
+    if(pazymiai.size() == 0){
+        double pazymiuVidurkis = 0.0;
+    } else {
+        double sum = accumulate(pazymiai.begin(), pazymiai.end(),0);
+        double pazymiuVidurkis = sum / (double)pazymiai.size();
+    }
     double galutinis = 0.4 * pazymiuVidurkis + 0.6 * egzaminas;
     galutinisVid = galutinis;
 }
 
 void Studentas::skaiciuotiGalutiniSuMediana(){
     int n = pazymiai.size();
-    int med = 1;
-    sort(pazymiai.begin(), pazymiai.end());
-    if ( n % 2 != 0){
-        med = (double)pazymiai[n/2];
-    } else {
-        med = (double)(pazymiai[(n-1)/2] + pazymiai[n/2]) / 2.0;
+    int med;
+    if (n == 0){
+        med = 0;
+    } else { 
+        sort(pazymiai.begin(), pazymiai.end());
+        if ( n % 2 != 0){
+            med = (double)pazymiai[n/2];
+        } else {
+            med = (double)(pazymiai[(n-1)/2] + pazymiai[n/2]) / 2.0;
+        }
     }
 
     double galutinis = 0.4 * med + 0.6 * egzaminas;

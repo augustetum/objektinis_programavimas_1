@@ -94,16 +94,25 @@ int main(){
                     cout << "---------------------------------" << endl;
 
                     while (true){
-                        Studentas stud;
-                        cout << "Įveskite studento vardą (įvedę visus norimus studentus ir norėdami užbaigti rašykite stop)" << endl;
-                        cin >> stud.vardas;
-                        if (stud.vardas == "stop"){
-                            break;
+                        try {
+                            Studentas stud;
+                            cout << "Įveskite studento vardą (įvedę visus norimus studentus ir norėdami užbaigti rašykite stop)" << endl;
+                            cin >> stud.vardas;
+                            if (stud.vardas == "stop"){
+                                break;
+                            }
+                            if (!vardoTikrinimas(stud.vardas)) {
+                                    throw std::runtime_error("Neteisingas vardas! Vardas turi būti sudarytas tik iš raidžių.");
+                            }
+                            cout << "Įveskite studento pavardę" << endl;
+                            cin >> stud.pavarde;
+                            if (!vardoTikrinimas(stud.pavarde)) {
+                                    throw std::runtime_error("Neteisinga pavardė! Pavardė turi būti sudaryta tik iš raidžių.");
+                            }
+                            studentuSarasas.push_back(stud);
+                        } catch (const std::runtime_error &e){
+                        cout << e.what() << endl;
                         }
-                        cout << "Įveskite studento pavardę" << endl;
-                        cin >> stud.pavarde;
-
-                        studentuSarasas.push_back(stud);
                     }
 
                     generuotiPazymius(studentuSarasas);

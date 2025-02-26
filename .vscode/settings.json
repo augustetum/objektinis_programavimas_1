@@ -54,6 +54,7 @@
         "algorithm": "cpp",
         "fstream": "cpp",
         "charconv": "cpp",
-        "forward_list": "cpp"
+        "forward_list": "cpp",
+        "unordered_set": "cpp"
     }
 }
