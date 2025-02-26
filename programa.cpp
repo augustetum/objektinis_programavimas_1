@@ -52,10 +52,20 @@ int main(){
                             cout << "Įveskite studento namų darbų pažymius (baigę įveskite -1)" << endl;
                             int input;
                             while (true){
-                                cin >> input;
-                                if (input == -1)
-                                break;
-                                stud.pazymiai.push_back(input);
+                                try {
+                                    cin >> input;
+                                    if (input == -1)
+                                    break;
+                                    if(cin.fail() || input < 1 || input > 10) {
+                                        cin.clear();
+                                        cin.ignore();
+                                        throw std::runtime_error("Neteisingas pažymys! Pažymys susidaro tik iš skaičių, turi būti tarp 1 ir 10");
+                                    }
+                                    stud.pazymiai.push_back(input);
+                                } catch (const std::runtime_error &e){
+                                    cout << e.what() << endl;
+                                    continue;
+                                }
                             }
                             cout << "Įveskite studento egzamino pažymį" << endl;
                             cin >> stud.egzaminas;
