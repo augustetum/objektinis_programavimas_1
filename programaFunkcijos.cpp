@@ -122,36 +122,6 @@ void generuotiStudentus(vector<Studentas> &studentuSarasas){
 
 }
 
-void skaitytiIsFailo(vector<Studentas> &studentuSarasas){
-    ifstream failas("studentai1000000.txt");
-    string eilut;
-    int pazymys;
-
-    getline(failas, eilut);
-
-    
-    auto start = std::chrono::high_resolution_clock::now(); auto st=start;
-    while(getline(failas, eilut)){
-        Studentas stud;
-        istringstream eilute(eilut);
-        eilute >> stud.vardas >> stud.pavarde;
-        while(eilute >> pazymys){
-            stud.pazymiai.push_back(pazymys);
-        }
-
-        stud.egzaminas = stud.pazymiai.back();
-        stud.pazymiai.pop_back();
-        stud.skaiciuotiGalutiniSuMediana();
-        stud.skaiciuotiGalutiniSuVidurkiu();
-
-        studentuSarasas.push_back(stud);
-    }
-    std::chrono::duration<double> diff = std::chrono::high_resolution_clock::now()-start; 
-    std::cout << "Failo nuskaitymas užtruko: "<< diff.count() << " s\n";
-
-    failas.close();
-}
-
 void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas){
     string eilut;
     int pazymys;
@@ -169,45 +139,53 @@ void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas){
     }
     tempFail.close();
     system("rm temp.txt");
+    string fail;
 
-    cout << "Pasirinkite norimą failą" << endl;
-    for(int i = 1; i <= failuPav.size(); i++){
-        cout << i << "| " << failuPav[i-1] << endl;
-    }
-    int choice;
-    cin >> choice;
-    if (choice < 1 || choice > failuPav.size()) {
-        cout << "Neteisingas meniu pasirinkimas" << endl;
-        return;
-    }
+    while(true){
+        try{
+            cout << "Pasirinkite norimą failą" << endl;
+            for(int i = 1; i <= failuPav.size(); i++){
+                cout << i << "| " << failuPav[i-1] << endl;
+            }
+            int choice;
+            cin >> choice;
+            if (choice < 1 || choice > failuPav.size()) {
+                throw std::runtime_error("Neteisingas failo pasirinkimas");
+            } else {
+                 fail = failuPav[choice-1];
+            }
 
-    string fail = failuPav[choice-1];
+            ifstream failas(fail);
+            Timer t;
+            buferis << failas.rdbuf();
+            failas.close();
 
-    ifstream failas(fail);
-    Timer t;
-    buferis << failas.rdbuf();
-    failas.close();
+            getline(buferis, eilut);
 
-    getline(buferis, eilut);
+            while(getline(buferis, eilut)){
+                Studentas stud;
+                istringstream eilute(eilut);
+                eilute >> stud.vardas >> stud.pavarde;
+                while(eilute >> pazymys){
+                    stud.pazymiai.push_back(pazymys);
+                }
 
-    while(getline(buferis, eilut)){
-        Studentas stud;
-        istringstream eilute(eilut);
-        eilute >> stud.vardas >> stud.pavarde;
-        while(eilute >> pazymys){
-            stud.pazymiai.push_back(pazymys);
+                stud.egzaminas = stud.pazymiai.back();
+                stud.pazymiai.pop_back();
+                stud.skaiciuotiGalutiniSuMediana();
+                stud.skaiciuotiGalutiniSuVidurkiu();
+
+                studentuSarasas.push_back(stud);
+            }
+            cout << "Procesas užtruko: "<< t.elapsed() << " s\n";
+            cout << endl;
+            break;
+        } catch (const std::runtime_error &e) {
+            cout << e.what() << endl;
+            continue;
         }
 
-        stud.egzaminas = stud.pazymiai.back();
-        stud.pazymiai.pop_back();
-        stud.skaiciuotiGalutiniSuMediana();
-        stud.skaiciuotiGalutiniSuVidurkiu();
-
-        studentuSarasas.push_back(stud);
     }
-
-    std::cout << "Procesas užtruko: "<< t.elapsed() << " s\n";
-
 }
 
 void rikiuotiPagalVarda(vector<Studentas> studentuSarasas){
@@ -292,7 +270,7 @@ void testuotiFailuNuskaityma(vector<Studentas> studentuSarasas, int kartai){
         duration += t.elapsed();
     }
 
-    double durationAvg = duration / kartai;
+    double durationAvg = duration / (double)kartai;
 
     std::cout << "Procesas vidutiniškai užtruko: "<< durationAvg << " s\n";
 

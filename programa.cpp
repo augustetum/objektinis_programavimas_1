@@ -16,8 +16,14 @@ int main(){
             cout << "6 | Baigti darbą" << endl;
             cin >> menuChoice;
 
+            if(cin.fail()) {
+                cin.clear();
+                cin.ignore();
+                throw std::runtime_error("Neteisingas meniu pasirinkimas!");
+            }
+
             if (menuChoice != 1 && menuChoice != 2 && menuChoice != 3 && menuChoice != 4 && menuChoice != 5 && menuChoice != 6){
-                throw "Neteisingas meniu pasirinkimas!";
+                throw std::runtime_error("Neteisingas meniu pasirinkimas!");
             }
 
             switch(menuChoice) 
@@ -134,8 +140,8 @@ int main(){
                     veikimas = false;
                 break;
             }
-        } catch (const char* msg) {
-            cout << msg << endl;
+        } catch (const std::runtime_error &e) {
+            cout << e.what() << endl;
             continue;
         }
     }
