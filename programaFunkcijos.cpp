@@ -275,3 +275,12 @@ void testuotiFailuNuskaityma(vector<Studentas> studentuSarasas, int kartai){
     std::cout << "Procesas vidutiniškai užtruko: "<< durationAvg << " s\n";
 
 }
+
+bool vardoTikrinimas(const string &vard){
+    for(char c: vard){
+        if (!isalpha(c)){
+            return false;
+        }
+    }
+    return true;
+}

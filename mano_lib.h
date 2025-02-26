@@ -41,3 +41,5 @@ void rikiuotiPagalVarda(vector<Studentas> studentuSarasas);
 void rikiuotiPagalPavarde(vector<Studentas> studentuSarasas);
 void rikiuotiPagalGalutiniMed(vector<Studentas> studentuSarasas);
 void rikiuotiPagalGalutiniVid(vector<Studentas> studentuSarasas);
+
+bool vardoTikrinimas(const string &vard);

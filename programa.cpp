@@ -34,28 +34,38 @@ int main(){
                     cout << "---------------------------------" << endl;
                     
                     while (true){
-                        Studentas stud;
-                        cout << "Įveskite studento vardą (įvedę visus norimus studentus ir norėdami užbaigti rašykite stop)" << endl;
-                        cin >> stud.vardas;
-                        if (stud.vardas == "stop"){
-                            break;
-                        }
-                        cout << "Įveskite studento pavardę" << endl;
-                        cin >> stud.pavarde;
-                        cout << "Įveskite studento namų darbų pažymius (baigę įveskite -1)" << endl;
-                        int input;
-                        while (true){
-                            cin >> input;
-                            if (input == -1)
-                            break;
-                            stud.pazymiai.push_back(input);
-                        }
-                        cout << "Įveskite studento egzamino pažymį" << endl;
-                        cin >> stud.egzaminas;
+                        try {
+                            Studentas stud;
+                            cout << "Įveskite studento vardą (įvedę visus norimus studentus ir norėdami užbaigti rašykite stop)" << endl;
+                            cin >> stud.vardas;
+                            if (stud.vardas == "stop"){
+                                break;
+                            }
+                            if (!vardoTikrinimas(stud.vardas)) {
+                                throw std::runtime_error("Neteisingas vardas! Vardas turi būti sudarytas tik iš raidžių.");
+                            }
+                            cout << "Įveskite studento pavardę" << endl;
+                            cin >> stud.pavarde;
+                            if (!vardoTikrinimas(stud.pavarde)) {
+                                throw std::runtime_error("Neteisinga pavardė! Pavardė turi būti sudaryta tik iš raidžių.");
+                            }
+                            cout << "Įveskite studento namų darbų pažymius (baigę įveskite -1)" << endl;
+                            int input;
+                            while (true){
+                                cin >> input;
+                                if (input == -1)
+                                break;
+                                stud.pazymiai.push_back(input);
+                            }
+                            cout << "Įveskite studento egzamino pažymį" << endl;
+                            cin >> stud.egzaminas;
 
-                        studentuSarasas.push_back(stud);
+                            studentuSarasas.push_back(stud);
+                        } catch (const std::runtime_error &e){
+                            cout << e.what() << endl;
+                            continue;
+                        }
                     }
-
                         rodytiRezultatus(studentuSarasas);
 
                 break;
