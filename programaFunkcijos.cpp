@@ -310,21 +310,41 @@ void testuotiFailuNuskaityma(vector<Studentas> studentuSarasas, int kartai){
 
                 getline(buferis, eilut);
 
-                while(getline(buferis, eilut)){
-                    Studentas stud;
-                    istringstream eilute(eilut);
-                    eilute >> stud.vardas >> stud.pavarde;
-                    while(eilute >> pazymys){
-                        stud.pazymiai.push_back(pazymys);
-                    }
+            while(getline(buferis, eilut)){
+                Studentas stud;
+                istringstream eilute(eilut);
+                eilute >> stud.vardas >> stud.pavarde;
 
+                if (eilute.eof()) {
+                    throw "Netinkamas failo formatas: faile nėra pažymių";
+                }
+                
+                while(true){
+                    eilute >> pazymys;
+                    if (eilute.fail()){
+                        if (eilute.eof()){
+                            break;
+                        }
+                        eilute.clear();
+                        eilute.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                        throw "Netinkamas failo formatas: pažymiai nėra skaitinės reikšmės";
+                    }
+                    if (pazymys < 1 || pazymys > 10){
+                        throw "Netinkamas failo formatas: pažymiai nėra sveiki skaičiai ribose nuo 1 iki 10";
+                    }
+                    stud.pazymiai.push_back(pazymys);
+                }
+                if (!stud.pazymiai.empty()) {
                     stud.egzaminas = stud.pazymiai.back();
                     stud.pazymiai.pop_back();
-                    stud.skaiciuotiGalutiniSuMediana();
-                    stud.skaiciuotiGalutiniSuVidurkiu();
-
-                    studentuSarasas.push_back(stud);
+                } else {
+                    throw "Netinkamas failo formatas: faile nėra pažymių";
                 }
+                stud.skaiciuotiGalutiniSuMediana();
+                stud.skaiciuotiGalutiniSuVidurkiu();
+
+                studentuSarasas.push_back(stud);
+            }
                 duration += t.elapsed();
             }
 
