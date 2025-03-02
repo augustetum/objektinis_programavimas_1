@@ -18,7 +18,7 @@ int main(){
 
             if(cin.fail()) {
                 cin.clear();
-                cin.ignore();
+                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 throw std::runtime_error("Neteisingas meniu pasirinkimas!");
             }
 
@@ -160,10 +160,10 @@ int main(){
                             } else if (rikiavimas == 5) {
                                 rodytiVisusRezultatus(studentuSarasas);
                             } else {
-                                throw "Neteisingas meniu pasirinkimas!";
+                                throw std::runtime_error("Neteisingas meniu pasirinkimas!");
                             }
-                        } catch (const char* msg) {
-                            cout << msg << endl;
+                        } catch (std::runtime_error &e) {
+                            cout << e.what() << endl;
                             continue;
                         }
                         break;
@@ -171,11 +171,24 @@ int main(){
                 break;
 
                 case 5:
-                    cout << "Pasirinkote testuoti programą" <<endl;
-                    int kartai;
-                    cout << "Kiek kartų norite nuskaityti failą?" << endl;
-                    cin >> kartai;
-                    testuotiFailuNuskaityma(studentuSarasas, kartai);
+                    while(true){
+                        try {
+                        cout << "Pasirinkote testuoti programą" <<endl;
+                        int kartai;
+                        cout << "Kiek kartų norite nuskaityti failą?" << endl;
+                        cin >> kartai;
+                        if (cin.fail() || kartai < 1){
+                            cin.clear();
+                            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                            throw std::runtime_error("Neteisingas testų skaičiaus pasirinkimas");
+                        }
+                        testuotiFailuNuskaityma(studentuSarasas, kartai);
+                    } catch (std::runtime_error &e){
+                        cout << e.what() << endl;
+                        continue;
+                    }
+                    break;
+                }
                 break;
                     
                 case 6:

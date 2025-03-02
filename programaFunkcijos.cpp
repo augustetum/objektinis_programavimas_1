@@ -135,23 +135,23 @@ void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas){
     string eilut;
     int pazymys;
     std::stringstream buferis;
-    
-    system("ls *.txt > temp.txt");
-    ifstream tempFail("temp.txt");
-    vector<string> failuPav;
-    std::unordered_set<string> nenorimiFailai = {"studentuRezultatai.txt", "firstNames.txt", "lastNames.txt"};
-    string failoPav;
-    while(getline(tempFail, failoPav)){
-        if (nenorimiFailai.find(failoPav) == nenorimiFailai.end()) {
-            failuPav.push_back(failoPav);
-        }
-    }
-    tempFail.close();
-    system("rm temp.txt");
-    string fail;
 
     while(true){
         try{
+            system("ls *.txt > temp.txt");
+            ifstream tempFail("temp.txt");
+            vector<string> failuPav;
+            std::unordered_set<string> nenorimiFailai = {"studentuRezultatai.txt", "firstNames.txt", "lastNames.txt"};
+            string failoPav;
+            while(getline(tempFail, failoPav)){
+                if (nenorimiFailai.find(failoPav) == nenorimiFailai.end()) {
+                    failuPav.push_back(failoPav);
+                }
+            }
+            tempFail.close();
+            system("rm temp.txt");
+            string fail;
+
             cout << "Pasirinkite norimą failą" << endl;
             for(int i = 1; i <= failuPav.size(); i++){
                 cout << i << "| " << failuPav[i-1] << endl;
@@ -159,6 +159,8 @@ void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas){
             int choice;
             cin >> choice;
             if (choice < 1 || choice > failuPav.size()) {
+                cin.clear();
+                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 throw std::runtime_error("Neteisingas failo pasirinkimas");
             } else {
                  fail = failuPav[choice-1];
@@ -197,7 +199,6 @@ void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas){
             cout << e.what() << endl;
             continue;
         }
-
     }
 }
 
@@ -238,54 +239,81 @@ void testuotiFailuNuskaityma(vector<Studentas> studentuSarasas, int kartai){
     string eilut;
     int pazymys;
     double duration;
-    
-    int choice;
-    cout << "Įveskite norimą studentų kiekį (10000, 100000 ar 1000000)" << endl;
-    cin >> choice;
-    string fail;
-    Timer t;
-    
-    if (choice == 10000){
-        fail = "studentai10000.txt";
-    } else if (choice == 100000) {
-        fail = "studentai100000.txt";
-    } else if (choice == 1000000) {
-        fail = "studentai1000000.txt";
-    } else {
-        cout << "Neteisingas meniu pasirinkimas";
-    }
 
-    for (int x = 0; x < kartai; x++){
-        ifstream failas(fail);
-        std::stringstream buferis;
-        studentuSarasas.clear();
-        t.reset();
-        buferis << failas.rdbuf();
-        failas.close();
+    while(true){
+        try{
+            system("ls *.txt > temp.txt");
+            ifstream tempFail("temp.txt");
+            vector<string> failuPav;
+            std::unordered_set<string> nenorimiFailai = {"studentuRezultatai.txt", "firstNames.txt", "lastNames.txt"};
+            string failoPav;
+            while(getline(tempFail, failoPav)){
+                if (nenorimiFailai.find(failoPav) == nenorimiFailai.end()) {
+                    failuPav.push_back(failoPav);
+                }
+            }
+            tempFail.close();
+            system("rm temp.txt");
+            string fail;
 
-        getline(buferis, eilut);
-
-        while(getline(buferis, eilut)){
-            Studentas stud;
-            istringstream eilute(eilut);
-            eilute >> stud.vardas >> stud.pavarde;
-            while(eilute >> pazymys){
-                stud.pazymiai.push_back(pazymys);
+            cout << "Pasirinkite norimą failą" << endl;
+            for(int i = 1; i <= failuPav.size(); i++){
+                cout << i << "| " << failuPav[i-1] << endl;
+            }
+            int choice;
+            cin >> choice;
+            if (choice < 1 || choice > failuPav.size()) {
+                cin.clear();
+                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                throw std::runtime_error("Neteisingas failo pasirinkimas");
+            } else {
+                 fail = failuPav[choice-1];
             }
 
-            stud.egzaminas = stud.pazymiai.back();
-            stud.pazymiai.pop_back();
-            stud.skaiciuotiGalutiniSuMediana();
-            stud.skaiciuotiGalutiniSuVidurkiu();
+            ifstream failas(fail);
+            if (!failas.is_open()){
+                throw std::runtime_error("Failo nepavyko atidaryti arba jis neegzistuoja šiame aplankale");
+            }
 
-            studentuSarasas.push_back(stud);
+            Timer t;
+
+            for (int x = 0; x < kartai; x++){
+                ifstream failas(fail);
+                std::stringstream buferis;
+                studentuSarasas.clear();
+                t.reset();
+                buferis << failas.rdbuf();
+                failas.close();
+
+                getline(buferis, eilut);
+
+                while(getline(buferis, eilut)){
+                    Studentas stud;
+                    istringstream eilute(eilut);
+                    eilute >> stud.vardas >> stud.pavarde;
+                    while(eilute >> pazymys){
+                        stud.pazymiai.push_back(pazymys);
+                    }
+
+                    stud.egzaminas = stud.pazymiai.back();
+                    stud.pazymiai.pop_back();
+                    stud.skaiciuotiGalutiniSuMediana();
+                    stud.skaiciuotiGalutiniSuVidurkiu();
+
+                    studentuSarasas.push_back(stud);
+                }
+                duration += t.elapsed();
+            }
+
+            double durationAvg = duration / (double)kartai;
+            std::cout << "Procesas vidutiniškai užtruko: "<< durationAvg << " s\n";
+            break;
+
+        } catch (std::runtime_error &e){
+            cout << e.what() << endl;
+            continue;
         }
-        duration += t.elapsed();
     }
-
-    double durationAvg = duration / (double)kartai;
-
-    std::cout << "Procesas vidutiniškai užtruko: "<< durationAvg << " s\n";
 
 }
 
