@@ -136,7 +136,12 @@ int main(){
                 case 4:
                     cout << "Pasirinkote nuskaityti duomenis iš failo" << endl;
                     cout << "----------------------------------------" << endl;
-                    skaitytiIsFailoSuBuf(studentuSarasas);
+                    try {
+                        skaitytiIsFailoSuBuf(studentuSarasas);
+                    } catch (const char* e){
+                        cout << "Nuskaitymas nepavyko" << endl;
+                        break;
+                    }
 
                     while (true){
                         try {

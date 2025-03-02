@@ -181,12 +181,32 @@ void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas){
                 Studentas stud;
                 istringstream eilute(eilut);
                 eilute >> stud.vardas >> stud.pavarde;
-                while(eilute >> pazymys){
+
+                if (eilute.eof()) {
+                    throw "Netinkamas failo formatas: faile nėra pažymių";
+                }
+                
+                while(true){
+                    eilute >> pazymys;
+                    if (eilute.fail()){
+                        if (eilute.eof()){
+                            break;
+                        }
+                        eilute.clear();
+                        eilute.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                        throw "Netinkamas failo formatas: pažymiai nėra skaitinės reikšmės";
+                    }
+                    if (pazymys < 1 || pazymys > 10){
+                        throw "Netinkamas failo formatas: pažymiai nėra sveiki skaičiai ribose nuo 1 iki 10";
+                    }
                     stud.pazymiai.push_back(pazymys);
                 }
-
-                stud.egzaminas = stud.pazymiai.back();
-                stud.pazymiai.pop_back();
+                if (!stud.pazymiai.empty()) {
+                    stud.egzaminas = stud.pazymiai.back();
+                    stud.pazymiai.pop_back();
+                } else {
+                    throw "Netinkamas failo formatas: faile nėra pažymių";
+                }
                 stud.skaiciuotiGalutiniSuMediana();
                 stud.skaiciuotiGalutiniSuVidurkiu();
 
@@ -198,6 +218,9 @@ void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas){
         } catch (const std::runtime_error &e) {
             cout << e.what() << endl;
             continue;
+        } catch (const char* e){
+            cout << e << endl;
+            throw;
         }
     }
 }
