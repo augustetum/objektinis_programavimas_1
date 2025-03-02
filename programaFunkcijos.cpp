@@ -1,11 +1,12 @@
 #include "mano_lib.h"
 
 void Studentas::skaiciuotiGalutiniSuVidurkiu(){
+    double pazymiuVidurkis;
     if(pazymiai.size() == 0){
-        double pazymiuVidurkis = 0.0;
+        pazymiuVidurkis = 0.0;
     } else {
         double sum = accumulate(pazymiai.begin(), pazymiai.end(),0);
-        double pazymiuVidurkis = sum / (double)pazymiai.size();
+        pazymiuVidurkis = sum / (double)pazymiai.size();
     }
     double galutinis = 0.4 * pazymiuVidurkis + 0.6 * egzaminas;
     galutinisVid = galutinis;

@@ -56,9 +56,9 @@ int main(){
                                     if (input == -1){
                                         break;
                                     } 
-                                    if(cin.fail() || input < -1 || input > 10) {
+                                    if(cin.fail() || input < 1 || input > 10) {
                                         cin.clear();
-                                        cin.ignore();
+                                        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                                         throw std::runtime_error("Neteisingas pažymys! Pažymys susidaro tik iš skaičių, turi būti tarp 1 ir 10");
                                     }
                                     stud.pazymiai.push_back(input);
@@ -68,15 +68,21 @@ int main(){
                                 }
                             }
                             while (true) {
-                                int input;
-                                cout << "Įveskite studento egzamino pažymį" << endl;
-                                cin >> stud.egzaminas;
-                                if(cin.fail() || input < 1 || input > 10) {
-                                    cin.clear();
-                                    cin.ignore();
-                                    throw std::runtime_error("Neteisingas egzamino pažymys! Pažymys susidaro tik iš skaičių, turi būti tarp 1 ir 10");
+                                try {
+                                    int input;
+                                    cout << "Įveskite studento egzamino pažymį" << endl;
+                                    cin >> input;
+                                    if(cin.fail() || input < 1 || input > 10) {
+                                        cin.clear();
+                                        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                        throw std::runtime_error("Neteisingas egzamino pažymys! Pažymys susidaro tik iš skaičių, turi būti sveikas skaičius tarp 1 ir 10");
+                                    }
+                                    stud.egzaminas = input;
+                                    break;
+                                } catch (const std::runtime_error &e){
+                                    cout << e.what() << endl;
+                                    continue;
                                 }
-                                break;
                             }
 
                             studentuSarasas.push_back(stud);
@@ -85,8 +91,7 @@ int main(){
                             continue;
                         }
                     }
-                        rodytiRezultatus(studentuSarasas);
-
+                    rodytiRezultatus(studentuSarasas);
                 break;
 
                 case 2:
