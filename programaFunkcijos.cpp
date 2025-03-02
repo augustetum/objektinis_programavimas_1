@@ -165,6 +165,10 @@ void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas){
             }
 
             ifstream failas(fail);
+            if (!failas.is_open()){
+                throw std::runtime_error("Failo nepavyko atidaryti arba jis neegzistuoja šiame aplankale");
+            }
+
             Timer t;
             buferis << failas.rdbuf();
             failas.close();
