@@ -131,6 +131,42 @@ void generuotiStudentus(vector<Studentas> &studentuSarasas){
 
 }
 
+void generuotiFailus(int studentuSkaicius){
+    int pazymiuKiekis = 3 + (rand() % 18);
+
+    //Failo sukurimas
+    string name = "genStudentai" + std::to_string(studentuSkaicius) + ".txt";
+    std::ofstream failas(name);
+
+    //Irasymas i faila
+    std::ostringstream buferis;
+    buferis << std::left << std::setw(20) << "Vardas" << std::setw(20) << "Pavarde";
+    for (int x = 1; x <=pazymiuKiekis; x++){
+        buferis << std::left << std::setw(20) << "ND" + std::to_string(x);
+    }
+    buferis << std::left << std::setw(20) << "Egz" << endl;
+
+    //Studentu generavimas
+    for(int i = 1; i <= studentuSkaicius; i++){
+        Studentas stud;
+        stud.vardas = "Vardas" + std::to_string(i);
+        stud.pavarde = "Pavarde" + std::to_string(i);
+        for (int x = 0; x < pazymiuKiekis; x++){
+            int pazymys = 1 + (rand() % 10);
+            stud.pazymiai.push_back(pazymys);
+        }
+        int egzPazymys = 1 + (rand() % 10);
+        stud.egzaminas = egzPazymys;
+        buferis << std::left << std::setw(20) << stud.vardas << std::setw(20) << stud.pavarde;
+        for(int i : stud.pazymiai){
+            buferis << std::left << std::setw(20) << i;
+        }
+        buferis << std::left << std::setw(20) << stud.egzaminas << endl;
+    }
+    failas << buferis.str();
+    failas.close();
+}
+
 void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas){
     string eilut;
     int pazymys;

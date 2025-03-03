@@ -13,7 +13,8 @@ int main(){
             cout << "3 | Generuoti pažymius bei studentų vardus, pavardes" << endl;
             cout << "4 | Nuskaityti duomenis iš failo" << endl;
             cout << "5 | Testuoti failų nuskaitymą" << endl;
-            cout << "6 | Baigti darbą" << endl;
+            cout << "6 | Generuoti studentų failą" << endl;
+            cout << "7 | Baigti darbą" << endl;
             cin >> menuChoice;
 
             if(cin.fail()) {
@@ -22,7 +23,7 @@ int main(){
                 throw std::runtime_error("Neteisingas meniu pasirinkimas!");
             }
 
-            if (menuChoice != 1 && menuChoice != 2 && menuChoice != 3 && menuChoice != 4 && menuChoice != 5 && menuChoice != 6){
+            if (menuChoice != 1 && menuChoice != 2 && menuChoice != 3 && menuChoice != 4 && menuChoice != 5 && menuChoice != 6 && menuChoice != 7){
                 throw std::runtime_error("Neteisingas meniu pasirinkimas!");
             }
 
@@ -197,6 +198,14 @@ int main(){
                 break;
                     
                 case 6:
+                    cout << "Pasirinkote generuoti failus" << endl;
+                    int studentuKiekis;
+                    cout << "Įveskite norimą studentų kiekį: " << endl;
+                    cin >> studentuKiekis;
+                    generuotiFailus(studentuKiekis);
+                break;
+
+                case 7:
                     cout << "Programa baigta" << endl;
                     veikimas = false;
                 break;

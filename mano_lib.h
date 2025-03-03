@@ -33,6 +33,7 @@ struct Studentas{
 void rodytiRezultatus(vector<Studentas> studentuSarasas);
 void generuotiPazymius(vector<Studentas> &studentuSarasas);
 void generuotiStudentus(vector<Studentas> &studentuSarasas);
+void generuotiFailus(int studentuSkaicius);
 void skaitytiIsFailo(vector<Studentas> &studentuSarasas);
 void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas);
 void rodytiVisusRezultatus(vector<Studentas> studentuSarasas);
