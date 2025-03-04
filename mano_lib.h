@@ -40,9 +40,14 @@ void rodytiVisusRezultatus(vector<Studentas> studentuSarasas);
 void testuotiFailuNuskaityma(vector<Studentas> studentuSarasas, int kartai);
 
 //rikiavimo funkcijos
-void rikiuotiPagalVarda(vector<Studentas> studentuSarasas);
-void rikiuotiPagalPavarde(vector<Studentas> studentuSarasas);
-void rikiuotiPagalGalutiniMed(vector<Studentas> studentuSarasas);
-void rikiuotiPagalGalutiniVid(vector<Studentas> studentuSarasas);
+void rikiuotiPagalVarda(vector<Studentas> &studentuSarasas);
+void rikiuotiPagalPavarde(vector<Studentas> &studentuSarasas);
+void rikiuotiPagalGalutiniMed(vector<Studentas> &studentuSarasas);
+void rikiuotiPagalGalutiniVid(vector<Studentas> &studentuSarasas);
+
+void pasirinktiRikiavima(vector<Studentas> studentuSarasas);
+void skirstytiStudentus(vector<Studentas> studentuSarasas);
 
 bool vardoTikrinimas(const string &vard);
+void isvestiDuFailus(vector<Studentas> grupe1, vector<Studentas> grupe2);
+void rikiavimasIrIrasymasVargsiukamsIrKietekams(vector<Studentas> vargsiukai, vector<Studentas> kietekai);

@@ -261,37 +261,28 @@ void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas){
     }
 }
 
-void rikiuotiPagalVarda(vector<Studentas> studentuSarasas){
-
+void rikiuotiPagalVarda(vector<Studentas> &studentuSarasas){
     sort(studentuSarasas.begin(), studentuSarasas.end(), [](const Studentas& a, const Studentas& b) {
         return a.vardas < b.vardas;
     });
-
-    rodytiVisusRezultatus(studentuSarasas);
 }
 
-void rikiuotiPagalPavarde(vector<Studentas> studentuSarasas){
+void rikiuotiPagalPavarde(vector<Studentas> &studentuSarasas){
     sort(studentuSarasas.begin(), studentuSarasas.end(), [](const Studentas& a, const Studentas& b) {
         return a.pavarde < b.pavarde;
     });
-
-    rodytiVisusRezultatus(studentuSarasas);
 }
 
-void rikiuotiPagalGalutiniMed(vector<Studentas> studentuSarasas){
+void rikiuotiPagalGalutiniMed(vector<Studentas> &studentuSarasas){
     sort(studentuSarasas.begin(), studentuSarasas.end(), [](const Studentas& a, const Studentas& b) {
         return a.galutinisMed < b.galutinisMed;
     });
-
-    rodytiVisusRezultatus(studentuSarasas);
 }
 
-void rikiuotiPagalGalutiniVid(vector<Studentas> studentuSarasas){
+void rikiuotiPagalGalutiniVid(vector<Studentas> &studentuSarasas){
     sort(studentuSarasas.begin(), studentuSarasas.end(), [](const Studentas& a, const Studentas& b) {
         return a.galutinisVid < b.galutinisVid;
     });
-
-    rodytiVisusRezultatus(studentuSarasas);
 }
 
 void testuotiFailuNuskaityma(vector<Studentas> studentuSarasas, int kartai){
@@ -403,4 +394,96 @@ bool vardoTikrinimas(const string &vard){
         }
     }
     return true;
+}
+
+void skirstytiStudentus(vector<Studentas> studentuSarasas){
+    vector<Studentas> vargsiukai;
+    vector<Studentas> kietekai;
+    for(Studentas s : studentuSarasas){
+        if (s.galutinisVid < 5){
+            vargsiukai.push_back(s);
+        } else if (s.galutinisVid >= 5){
+            kietekai.push_back(s);
+        }
+    }
+    rikiavimasIrIrasymasVargsiukamsIrKietekams(vargsiukai, kietekai);
+
+}
+
+void rikiavimasIrIrasymasVargsiukamsIrKietekams(vector<Studentas> vargsiukai, vector<Studentas> kietekai){
+    while (true){
+                        try {
+                            int rikiavimas;
+                            cout << "Pasirinkite rikiavimo būdą: " << endl;
+                            cout << "1 | Rikiuoti pagal vardą" << endl;
+                            cout << "2 | Rikiuoti pagal pavardę" << endl;
+                            cout << "3 | Rikiuoti pagal galutinį pažymį (su vidurkiu)" << endl;
+                            cout << "4 | Rikiuoti pagal galutinį pažymį (su mediana)" << endl;
+                            cout << "5 | Nerikiuoti" << endl;
+                            cin >> rikiavimas;
+
+                            if (rikiavimas == 1) {
+                                rikiuotiPagalVarda(vargsiukai);
+                                rikiuotiPagalVarda(kietekai);
+                                isvestiDuFailus(vargsiukai, kietekai);
+                            } else if (rikiavimas == 2) {
+                                rikiuotiPagalPavarde(vargsiukai);
+                                rikiuotiPagalPavarde(kietekai);
+                                isvestiDuFailus(vargsiukai, kietekai);
+                            } else if (rikiavimas == 3) {
+                                rikiuotiPagalGalutiniVid(vargsiukai);
+                                rikiuotiPagalGalutiniVid(kietekai);
+                                isvestiDuFailus(vargsiukai, kietekai);
+                            } else if (rikiavimas == 4) {
+                                rikiuotiPagalGalutiniMed(vargsiukai);
+                                rikiuotiPagalGalutiniMed(kietekai);
+                                isvestiDuFailus(vargsiukai, kietekai);
+                            } else if (rikiavimas == 5) {
+                                rodytiVisusRezultatus(vargsiukai);
+                                rodytiVisusRezultatus(kietekai);
+                                isvestiDuFailus(vargsiukai, kietekai);
+                            } else {
+                                throw std::runtime_error("Neteisingas meniu pasirinkimas!");
+                            }
+
+                                std::ostringstream buferis;
+                                std::ostringstream buferis2;
+                                buferis << std::left << std::setw(20) << "Pavardė" << std::setw(20) << "Vardas" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Vid.)" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Med.)" << endl;
+                                for (Studentas s: vargsiukai){
+                                    buferis << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisVid << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisMed << endl;
+                                }
+                                buferis2 << std::left << std::setw(20) << "Pavardė" << std::setw(20) << "Vardas" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Vid.)" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Med.)" << endl;
+                                for (Studentas s: kietekai){
+                                    buferis2 << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisVid << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisMed << endl;
+                                }
+                        } catch (std::runtime_error &e) {
+                            cout << e.what() << endl;
+                            continue;
+                        }
+                        break;
+                    }
+}
+
+void isvestiDuFailus(vector<Studentas> grupe1, vector<Studentas> grupe2){
+    std::ostringstream buferis;
+    buferis << std::left << std::setw(20) << "Pavardė" << std::setw(20) << "Vardas" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Vid.)" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Med.)" << endl;
+    for (Studentas s: grupe1){
+        buferis << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisVid << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisMed << endl;
+    }
+
+    std::ostringstream buferis2;
+    buferis2 << std::left << std::setw(20) << "Pavardė" << std::setw(20) << "Vardas" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Vid.)" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Med.)" << endl;
+    for (Studentas s: grupe2){
+        buferis2 << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisVid << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisMed << endl;
+    }
+        Timer t;
+        std::ofstream failas1("vargsiukai.txt");
+        std::ofstream failas2("kietekai.txt");
+        failas1 << buferis.str();
+        failas1.close();
+        failas2 << buferis2.str();
+        failas2.close();
+
+        cout << "Failus išvesti užtruko: " << t.elapsed() << " s\n";
+
 }

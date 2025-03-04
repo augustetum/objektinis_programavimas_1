@@ -14,7 +14,8 @@ int main(){
             cout << "4 | Nuskaityti duomenis iš failo" << endl;
             cout << "5 | Testuoti failų nuskaitymą" << endl;
             cout << "6 | Generuoti studentų failą" << endl;
-            cout << "7 | Baigti darbą" << endl;
+            cout << "7 | Skirstyti studentus pagal vidurkį" << endl;
+            cout << "8 | Baigti darbą" << endl;
             cin >> menuChoice;
 
             if(cin.fail()) {
@@ -157,13 +158,18 @@ int main(){
 
                             if (rikiavimas == 1) {
                                 rikiuotiPagalVarda(studentuSarasas);
+                                rodytiVisusRezultatus(studentuSarasas);
                             } else if (rikiavimas == 2) {
                                 rikiuotiPagalPavarde(studentuSarasas);
+                                rodytiVisusRezultatus(studentuSarasas);
                             } else if (rikiavimas == 3) {
                                 rikiuotiPagalGalutiniVid(studentuSarasas);
+                                rodytiVisusRezultatus(studentuSarasas);
                             } else if (rikiavimas == 4) {
                                 rikiuotiPagalGalutiniMed(studentuSarasas);
+                                rodytiVisusRezultatus(studentuSarasas);
                             } else if (rikiavimas == 5) {
+                                rodytiVisusRezultatus(studentuSarasas);
                                 rodytiVisusRezultatus(studentuSarasas);
                             } else {
                                 throw std::runtime_error("Neteisingas meniu pasirinkimas!");
@@ -206,6 +212,11 @@ int main(){
                 break;
 
                 case 7:
+                    skaitytiIsFailoSuBuf(studentuSarasas);
+                    skirstytiStudentus(studentuSarasas);
+                break;
+
+                case 8:
                     cout << "Programa baigta" << endl;
                     veikimas = false;
                 break;
