@@ -34,7 +34,7 @@ void rodytiRezultatus(vector<Studentas> studentuSarasas);
 void generuotiPazymius(vector<Studentas> &studentuSarasas);
 void generuotiStudentus(vector<Studentas> &studentuSarasas);
 void generuotiFailus(int studentuSkaicius);
-void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas);
+string pasirinktiFaila();
 void nuskaitytiFaila(string fail, vector<Studentas> &studentuSarasas);
 void rodytiVisusRezultatus(vector<Studentas> studentuSarasas);
 void testuotiFailuNuskaityma(vector<Studentas> studentuSarasas, int kartai);

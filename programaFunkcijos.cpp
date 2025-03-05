@@ -167,7 +167,7 @@ void generuotiFailus(int studentuSkaicius){
     failas.close();
 }
 
-void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas){
+string pasirinktiFaila(){
     string eilut;
     int pazymys;
     std::stringstream buferis;
@@ -201,7 +201,7 @@ void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas){
             } else {
                  fail = failuPav[choice-1];
             }
-            nuskaitytiFaila(fail, studentuSarasas);
+            return fail;
             break;
         } catch (const std::runtime_error &e) {
             cout << e.what() << endl;
@@ -222,7 +222,6 @@ void nuskaitytiFaila(string fail, vector<Studentas> &studentuSarasas){
                 throw std::runtime_error("Failo nepavyko atidaryti arba jis neegzistuoja šiame aplankale");
             }
 
-            Timer t;
             buferis << failas.rdbuf();
             failas.close();
 
@@ -263,8 +262,6 @@ void nuskaitytiFaila(string fail, vector<Studentas> &studentuSarasas){
 
                 studentuSarasas.push_back(stud);
             }
-            cout << "Failo " + fail + " atidarymas užtruko: "<< t.elapsed() << " s\n";
-            cout << endl;
 }
 
 void rikiuotiPagalVarda(vector<Studentas> &studentuSarasas){

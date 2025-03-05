@@ -142,7 +142,8 @@ int main(){
                     cout << "Pasirinkote nuskaityti duomenis iš failo" << endl;
                     cout << "----------------------------------------" << endl;
                     try {
-                        skaitytiIsFailoSuBuf(studentuSarasas);
+                        string fail = pasirinktiFaila();
+                        nuskaitytiFaila(fail, studentuSarasas);
                     } catch (const char* e){
                         cout << "Nuskaitymas nepavyko" << endl;
                         break;
@@ -222,7 +223,8 @@ int main(){
                 case 7: {
                     cout << "Pasirinkote skirstyti studentus į dvi grupes" << endl;
                     Timer s;
-                    skaitytiIsFailoSuBuf(studentuSarasas);
+                    string fail = pasirinktiFaila();
+                    nuskaitytiFaila(fail, studentuSarasas);
                     skirstytiStudentus(studentuSarasas);
                     cout << endl;
                     cout << "Iš viso programa užtruko: " << s.elapsed() << "s\n";
