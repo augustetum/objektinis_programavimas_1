@@ -14,7 +14,7 @@ int main(){
             cout << "4 | Nuskaityti duomenis iš failo" << endl;
             cout << "5 | Testuoti failų nuskaitymą" << endl;
             cout << "6 | Generuoti studentų failą" << endl;
-            cout << "7 | Skirstyti studentus į dvi grupes" << endl;
+            cout << "7 | Atlikti laiko matavimo tyrimą" << endl;
             cout << "8 | Baigti darbą" << endl;
             cin >> menuChoice;
 
@@ -221,13 +221,40 @@ int main(){
                 }
 
                 case 7: {
-                    cout << "Pasirinkote skirstyti studentus į dvi grupes" << endl;
-                    Timer s;
+                    cout << "Pasirinkote atlikti laiko matavimo tyrimą" << endl;
+                    Timer p;
                     string fail = pasirinktiFaila();
+                    int rikiavimas;
+                    cout << "Pasirinkite failo rikiavimo būdą: " << endl;
+                    cout << "1 | Rikiuoti pagal vardą" << endl;
+                    cout << "2 | Rikiuoti pagal pavardę" << endl;
+                    cout << "3 | Rikiuoti pagal galutinį pažymį (su vidurkiu)" << endl;
+                    cout << "4 | Rikiuoti pagal galutinį pažymį (su mediana)" << endl;
+                    cout << "5 | Nerikiuoti" << endl;
+                    while (true){
+                        try{
+                            cin >> rikiavimas;
+                            if (cin.fail()){
+                                cin.clear();
+                                cin.ignore();
+                                throw std::runtime_error("Neteisingas meniu pasirinkimas");
+                            } else if (rikiavimas != 1 && rikiavimas != 2 && rikiavimas != 3 && rikiavimas != 4 && rikiavimas != 5){
+                                throw std::runtime_error("Neteisingas meniu pasirinkimas");
+                            }
+                        } catch (const std::runtime_error &e){
+                            cout << e.what() << endl;
+                            continue;
+                        }
+                    }
+
+                    Timer f;
                     nuskaitytiFaila(fail, studentuSarasas);
-                    skirstytiStudentus(studentuSarasas);
+                    cout << "Failą " << fail << " nuskaityti užtruko: " << f.elapsed() << "s \n";
+
+                    skirstytiStudentus(studentuSarasas); //viduje metodo laiko matavimas
+
                     cout << endl;
-                    cout << "Iš viso programa užtruko: " << s.elapsed() << "s\n";
+                    cout << "Iš viso programa užtruko: " << p.elapsed() << "s\n";
                 break;
                 }
 
