@@ -201,8 +201,23 @@ void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas){
             } else {
                  fail = failuPav[choice-1];
             }
+            nuskaitytiFaila(fail, studentuSarasas);
+            break;
+        } catch (const std::runtime_error &e) {
+            cout << e.what() << endl;
+            continue;
+        } catch (const char* e){
+            cout << e << endl;
+            throw;
+        }
+    }
+}
 
-            ifstream failas(fail);
+void nuskaitytiFaila(string fail, vector<Studentas> &studentuSarasas){
+    string eilut;
+    int pazymys;
+    std::stringstream buferis;
+    ifstream failas(fail);
             if (!failas.is_open()){
                 throw std::runtime_error("Failo nepavyko atidaryti arba jis neegzistuoja šiame aplankale");
             }
@@ -250,15 +265,6 @@ void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas){
             }
             cout << "Failo " + fail + " atidarymas užtruko: "<< t.elapsed() << " s\n";
             cout << endl;
-            break;
-        } catch (const std::runtime_error &e) {
-            cout << e.what() << endl;
-            continue;
-        } catch (const char* e){
-            cout << e << endl;
-            throw;
-        }
-    }
 }
 
 void rikiuotiPagalVarda(vector<Studentas> &studentuSarasas){
@@ -479,6 +485,7 @@ void isvestiDuFailus(vector<Studentas> grupe1, vector<Studentas> grupe2){
     for (Studentas s: grupe2){
         buferis2 << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisVid << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisMed << endl;
     }
+    
         std::ofstream failas1("vargsiukai.txt");
         std::ofstream failas2("kietekai.txt");
         failas1 << buferis.str();
