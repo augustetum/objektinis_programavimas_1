@@ -241,6 +241,7 @@ int main(){
                             } else if (rikiavimas != 1 && rikiavimas != 2 && rikiavimas != 3 && rikiavimas != 4 && rikiavimas != 5){
                                 throw std::runtime_error("Neteisingas meniu pasirinkimas");
                             }
+                            break;
                         } catch (const std::runtime_error &e){
                             cout << e.what() << endl;
                             continue;
@@ -250,7 +251,22 @@ int main(){
                     Timer f;
                     nuskaitytiFaila(fail, studentuSarasas);
                     cout << "Failą " << fail << " nuskaityti užtruko: " << f.elapsed() << "s \n";
-
+                    Timer r;
+                    if (rikiavimas == 1) {
+                        rikiuotiPagalVarda(studentuSarasas);
+                        cout << "Rikiavimas užtruko: " << r.elapsed() << endl;
+                    } else if (rikiavimas == 2) {
+                        rikiuotiPagalPavarde(studentuSarasas);
+                        cout << "Rikiavimas užtruko: " << r.elapsed() << endl;
+                    } else if (rikiavimas == 3) {
+                        rikiuotiPagalGalutiniVid(studentuSarasas);
+                        cout << "Rikiavimas užtruko: " << r.elapsed() << endl;
+                    } else if (rikiavimas == 4) {
+                        rikiuotiPagalGalutiniMed(studentuSarasas);
+                        cout << "Rikiavimas užtruko: " << r.elapsed() << endl;
+                    } else if (rikiavimas == 5) {
+                        cout << "Rikiavimas užtruko: 0s" << endl;
+                    }
                     skirstytiStudentus(studentuSarasas); //viduje metodo laiko matavimas
 
                     cout << endl;
