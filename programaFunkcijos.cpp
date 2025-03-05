@@ -401,43 +401,50 @@ bool vardoTikrinimas(const string &vard){
 
 void skirstytiStudentus(vector<Studentas> studentuSarasas){
     Timer t;
-    vector<Studentas> vargsiukai;
-    vector<Studentas> kietekai;
+    vector<Studentas> nepazangus;
+    vector<Studentas> pazangus;
     for(Studentas s : studentuSarasas){
         if (s.galutinisVid < 5){
-            vargsiukai.push_back(s);
+            nepazangus.push_back(s);
         } else if (s.galutinisVid >= 5){
-            kietekai.push_back(s);
+            pazangus
+            .push_back(s);
         }
     }
     cout << "Studentų skirstymas į dvi grupes užtruko: " << t.elapsed() << "s\n";
-    isvestiDuFailus(vargsiukai, kietekai);
+    isvestiDuFailus(nepazangus, pazangus);
 
 }
 
 void isvestiDuFailus(vector<Studentas> grupe1, vector<Studentas> grupe2){
     Timer v;
-    std::ostringstream buferis;
-    buferis << std::left << std::setw(20) << "Pavardė" << std::setw(20) << "Vardas" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Vid.)" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Med.)" << endl;
-    for (Studentas s: grupe1){
-        buferis << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisVid << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisMed << endl;
+    double trukme;
+    for (int x = 0; x < 3; x++){
+        v.reset();
+        std::ostringstream buferis;
+        buferis << std::left << std::setw(20) << "Pavardė" << std::setw(20) << "Vardas" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Vid.)" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Med.)" << endl;
+        for (Studentas s: grupe1){
+            buferis << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisVid << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisMed << endl;
+        }
+        std::ofstream failas1("nepazangus.txt");
+        failas1 << buferis.str();
+        failas1.close();
+        cout << std::left << std::setw(60) << "Nepažangių mokinių failą išvesti užtruko: " << std::right << std::setw(10) << std::to_string(v.elapsed()) + "s" << endl;
+
+        Timer k;
+        std::ostringstream buferis2;
+        buferis2 << std::left << std::setw(20) << "Pavardė" << std::setw(20) << "Vardas" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Vid.)" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Med.)" << endl;
+        for (Studentas s: grupe2){
+            buferis2 << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisVid << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisMed << endl;
+        }
+
+            std::ofstream failas2("pazangus.txt");
+            failas2 << buferis2.str();
+            failas2.close();
+
+        trukme += v.elapsed();
     }
-    std::ofstream failas1("vargsiukai.txt");
-    failas1 << buferis.str();
-    failas1.close();
-    cout << "Vargšiukų failą išvesti užtruko: " << v.elapsed() << "s\n";
-
-    Timer k;
-    std::ostringstream buferis2;
-    buferis2 << std::left << std::setw(20) << "Pavardė" << std::setw(20) << "Vardas" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Vid.)" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Med.)" << endl;
-    for (Studentas s: grupe2){
-        buferis2 << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisVid << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisMed << endl;
-    }
-
-        std::ofstream failas2("kietekai.txt");
-        failas2 << buferis2.str();
-        failas2.close();
-
-    cout << "Kietekų failą išvesti užtruko: " << k.elapsed() << "s\n";
+    double vidutinis = trukme / 3.0;
+    cout << std::left << std::setw(60) << "Pažangių mokinių failą vidutiniškai išvesti užtruko: " << std::right << std::setw(10) << std::to_string(vidutinis) + "s" << endl;
 
 }

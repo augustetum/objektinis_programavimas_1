@@ -247,30 +247,33 @@ int main(){
                             continue;
                         }
                     }
-
+                    cout << endl;
+                    cout << "----------------------------------------------------" << endl;
                     Timer f;
                     nuskaitytiFaila(fail, studentuSarasas);
-                    cout << "Failą " << fail << " nuskaityti užtruko: " << f.elapsed() << "s \n";
+                    cout << std::left << std::setw(60) << "Failą " + fail + " nuskaityti užtruko: " << std::right << std::setw(10) << std::to_string(f.elapsed()) + "s" << endl;
                     Timer r;
                     if (rikiavimas == 1) {
                         rikiuotiPagalVarda(studentuSarasas);
-                        cout << "Rikiavimas užtruko: " << r.elapsed() << endl;
+                        cout << std::left << std::setw(60) << "Rikiavimas užtruko: " << std::right << std::setw(10) << std::to_string(r.elapsed()) + "s" << endl;
                     } else if (rikiavimas == 2) {
                         rikiuotiPagalPavarde(studentuSarasas);
-                        cout << "Rikiavimas užtruko: " << r.elapsed() << endl;
+                        cout << std::left << std::setw(60) << "Rikiavimas užtruko: " << std::right << std::setw(10) << std::to_string(r.elapsed()) + "s" << endl;
                     } else if (rikiavimas == 3) {
                         rikiuotiPagalGalutiniVid(studentuSarasas);
-                        cout << "Rikiavimas užtruko: " << r.elapsed() << endl;
+                        cout << std::left << std::setw(60) << "Rikiavimas užtruko: " << std::right << std::setw(10) << std::to_string(r.elapsed()) + "s" << endl;
                     } else if (rikiavimas == 4) {
                         rikiuotiPagalGalutiniMed(studentuSarasas);
-                        cout << "Rikiavimas užtruko: " << r.elapsed() << endl;
+                        cout << std::left << std::setw(60) << "Rikiavimas užtruko: " << std::right << std::setw(10) << std::to_string(r.elapsed()) + "s" << endl;
                     } else if (rikiavimas == 5) {
-                        cout << "Rikiavimas užtruko: 0s" << endl;
+                        cout << std::left << std::setw(60) << "Rikiavimas užtruko: 0s" << endl;
                     }
                     skirstytiStudentus(studentuSarasas); //viduje metodo laiko matavimas
 
                     cout << endl;
-                    cout << "Iš viso programa užtruko: " << p.elapsed() << "s\n";
+                    cout << std::left << std::setw(30) << "Iš viso programa užtruko: " << std::right << std::setw(10) << std::to_string(p.elapsed()) + "s" << endl;
+                    cout << "----------------------------------------------------" << endl;
+                    cout << endl;
                 break;
                 }
 
