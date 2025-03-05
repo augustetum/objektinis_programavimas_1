@@ -248,7 +248,7 @@ void skaitytiIsFailoSuBuf(vector<Studentas> &studentuSarasas){
 
                 studentuSarasas.push_back(stud);
             }
-            cout << "Procesas užtruko: "<< t.elapsed() << " s\n";
+            cout << "Failo " + fail + " atidarymas užtruko: "<< t.elapsed() << " s\n";
             cout << endl;
             break;
         } catch (const std::runtime_error &e) {
@@ -397,6 +397,7 @@ bool vardoTikrinimas(const string &vard){
 }
 
 void skirstytiStudentus(vector<Studentas> studentuSarasas){
+    Timer t;
     vector<Studentas> vargsiukai;
     vector<Studentas> kietekai;
     for(Studentas s : studentuSarasas){
@@ -406,6 +407,7 @@ void skirstytiStudentus(vector<Studentas> studentuSarasas){
             kietekai.push_back(s);
         }
     }
+    cout << "Studentų skirstymas į dvi grupes užtruko: " << t.elapsed() << "s\n";
     rikiavimasIrIrasymasVargsiukamsIrKietekams(vargsiukai, kietekai);
 
 }
@@ -465,6 +467,7 @@ void rikiavimasIrIrasymasVargsiukamsIrKietekams(vector<Studentas> vargsiukai, ve
 }
 
 void isvestiDuFailus(vector<Studentas> grupe1, vector<Studentas> grupe2){
+    Timer t;
     std::ostringstream buferis;
     buferis << std::left << std::setw(20) << "Pavardė" << std::setw(20) << "Vardas" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Vid.)" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Med.)" << endl;
     for (Studentas s: grupe1){
@@ -476,7 +479,6 @@ void isvestiDuFailus(vector<Studentas> grupe1, vector<Studentas> grupe2){
     for (Studentas s: grupe2){
         buferis2 << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisVid << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisMed << endl;
     }
-        Timer t;
         std::ofstream failas1("vargsiukai.txt");
         std::ofstream failas2("kietekai.txt");
         failas1 << buferis.str();

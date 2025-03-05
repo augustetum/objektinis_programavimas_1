@@ -14,7 +14,7 @@ int main(){
             cout << "4 | Nuskaityti duomenis iš failo" << endl;
             cout << "5 | Testuoti failų nuskaitymą" << endl;
             cout << "6 | Generuoti studentų failą" << endl;
-            cout << "7 | Skirstyti studentus pagal vidurkį" << endl;
+            cout << "7 | Skirstyti studentus į dvi grupes" << endl;
             cout << "8 | Baigti darbą" << endl;
             cin >> menuChoice;
 
@@ -24,13 +24,13 @@ int main(){
                 throw std::runtime_error("Neteisingas meniu pasirinkimas!");
             }
 
-            if (menuChoice != 1 && menuChoice != 2 && menuChoice != 3 && menuChoice != 4 && menuChoice != 5 && menuChoice != 6 && menuChoice != 7){
+            if (menuChoice != 1 && menuChoice != 2 && menuChoice != 3 && menuChoice != 4 && menuChoice != 5 && menuChoice != 6 && menuChoice != 7 && menuChoice != 8){
                 throw std::runtime_error("Neteisingas meniu pasirinkimas!");
             }
 
             switch(menuChoice) 
             {
-                case 1:
+                case 1: {
                     cout << "Pasirinkote studentų įvestį ranka" << endl;
                     cout << "---------------------------------" << endl;
                     
@@ -95,8 +95,9 @@ int main(){
                     }
                     rodytiRezultatus(studentuSarasas);
                 break;
+                }
 
-                case 2:
+                case 2: {
                     cout << "Pasirinkote generuoti pažymius" << endl;
                     cout << "---------------------------------" << endl;
 
@@ -126,16 +127,18 @@ int main(){
                     rodytiRezultatus(studentuSarasas);
 
                 break;
+                }
 
-                case 3:
+                case 3: {
                     cout << "Pasirinkote generuoti pažymius, studentų pavardes ir vardus" << endl;
                     cout << "---------------------------------" << endl;
                     generuotiStudentus(studentuSarasas);
                     generuotiPazymius(studentuSarasas);
                     rodytiRezultatus(studentuSarasas);
                 break;
+                }
 
-                case 4:
+                case 4: {
                     cout << "Pasirinkote nuskaityti duomenis iš failo" << endl;
                     cout << "----------------------------------------" << endl;
                     try {
@@ -181,8 +184,9 @@ int main(){
                         break;
                     }
                 break;
+                }
 
-                case 5:
+                case 5: {
                     while(true){
                         try {
                         cout << "Pasirinkote testuoti programą" <<endl;
@@ -202,24 +206,34 @@ int main(){
                     break;
                 }
                 break;
+                }
                     
-                case 6:
+                case 6: {
                     cout << "Pasirinkote generuoti failus" << endl;
                     int studentuKiekis;
                     cout << "Įveskite norimą studentų kiekį: " << endl;
                     cin >> studentuKiekis;
+                    Timer t;
                     generuotiFailus(studentuKiekis);
+                    cout << "Failą sukurti užtruko: " << t.elapsed() << " s\n";
                 break;
+                }
 
-                case 7:
+                case 7: {
+                    cout << "Pasirinkote skirstyti studentus į dvi grupes" << endl;
+                    Timer s;
                     skaitytiIsFailoSuBuf(studentuSarasas);
                     skirstytiStudentus(studentuSarasas);
+                    cout << endl;
+                    cout << "Iš viso programa užtruko: " << s.elapsed() << "s\n";
                 break;
+                }
 
-                case 8:
+                case 8: {
                     cout << "Programa baigta" << endl;
                     veikimas = false;
                 break;
+                }
             }
         } catch (const std::runtime_error &e) {
             cout << e.what() << endl;
