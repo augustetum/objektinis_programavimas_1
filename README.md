@@ -19,3 +19,32 @@ Vidutiniai studentų failų tyrimo rezultatai (trys iteracijos)
 | 1000000 | 1.644939 | 0.077956 | 0.204204 | 0.626222 | 0.925873 | 3.871331 |
 | 10000000 | 53.674973 | 0.675021 | 1.948356 | 3.988636 | 5.840717 | 70.340959 |
 
+Failų sukūrimo nuotraukos:
+
+<img width="316" alt="Screenshot 2025-03-07 at 08 45 18" src="https://github.com/user-attachments/assets/3a4b996a-fb31-430f-810c-f9dd62714d99" />
+
+
+
+
+<img width="308" alt="Screenshot 2025-03-07 at 08 47 47" src="https://github.com/user-attachments/assets/64ad9722-9ac5-4daf-b883-f6761328f0bf" />
+
+
+
+
+
+<img width="295" alt="Screenshot 2025-03-07 at 08 48 21" src="https://github.com/user-attachments/assets/d62798d6-9725-4817-a086-037da5db599f" />
+
+
+
+
+
+<img width="289" alt="Screenshot 2025-03-07 at 08 49 47" src="https://github.com/user-attachments/assets/66fd1892-8d2c-46a9-866c-3fca736db592" />
+
+
+
+
+
+<img width="288" alt="Screenshot 2025-03-07 at 08 50 47" src="https://github.com/user-attachments/assets/0fc5acd1-7082-4849-82db-432e87054b93" />
+
+
+
