@@ -399,7 +399,7 @@ bool vardoTikrinimas(const string &vard){
     return true;
 }
 
-void skirstytiStudentus(vector<Studentas> studentuSarasas){
+void skirstytiStudentus(vector<Studentas> &studentuSarasas){
     Timer t;
     vector<Studentas> nepazangus;
     vector<Studentas> pazangus;
@@ -412,8 +412,8 @@ void skirstytiStudentus(vector<Studentas> studentuSarasas){
         }
     }
     cout << std::left << std::setw(60) << "Studentų skirstymas į dvi grupes užtruko: " << std::right << std::setw(10) << std::to_string(t.elapsed()) + "s" << endl;
+    studentuSarasas.clear();
     isvestiDuFailus(nepazangus, pazangus);
-
 }
 
 void isvestiDuFailus(vector<Studentas> grupe1, vector<Studentas> grupe2){

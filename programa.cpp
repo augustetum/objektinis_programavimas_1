@@ -287,6 +287,7 @@ int main(){
                 double vidutinisLaikas = p.elapsed() / (double)kartai;
                 cout << endl;
                 cout << std::left << std::setw(60) << "Iš viso vidutiniškai programa užtruko: " << std::right << std::setw(10) << std::to_string(vidutinisLaikas) + "s" << endl;
+                cout << endl;
                 break;
                 }
 

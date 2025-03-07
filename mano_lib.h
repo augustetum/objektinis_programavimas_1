@@ -46,7 +46,7 @@ void rikiuotiPagalGalutiniMed(vector<Studentas> &studentuSarasas);
 void rikiuotiPagalGalutiniVid(vector<Studentas> &studentuSarasas);
 
 void pasirinktiRikiavima(vector<Studentas> studentuSarasas);
-void skirstytiStudentus(vector<Studentas> studentuSarasas);
+void skirstytiStudentus(vector<Studentas> &studentuSarasas);
 
 bool vardoTikrinimas(const string &vard);
 void isvestiDuFailus(vector<Studentas> grupe1, vector<Studentas> grupe2);
