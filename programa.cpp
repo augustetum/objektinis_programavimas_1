@@ -222,7 +222,12 @@ int main(){
 
                 case 7: {
                     cout << "Pasirinkote atlikti laiko matavimo tyrimą" << endl;
-                    Timer p;
+                    cout << "-----------------------------------------" << endl;
+                    int kartai;
+                    cout << "Kelis kartus norite tirti failą?" << endl;
+                    cin >> kartai;
+
+                    
                     string fail = pasirinktiFaila();
                     int rikiavimas;
                     cout << "Pasirinkite failo rikiavimo būdą: " << endl;
@@ -247,6 +252,10 @@ int main(){
                             continue;
                         }
                     }
+                    Timer p;
+                    Timer p2;
+                    for (int i = 0; i < kartai; i++){
+                        p2.reset();
                     cout << endl;
                     cout << "----------------------------------------------------" << endl;
                     Timer f;
@@ -271,9 +280,13 @@ int main(){
                     skirstytiStudentus(studentuSarasas); //viduje metodo laiko matavimas
 
                     cout << endl;
-                    cout << std::left << std::setw(30) << "Iš viso programa užtruko: " << std::right << std::setw(10) << std::to_string(p.elapsed()) + "s" << endl;
+                    cout << std::left << std::setw(60) << "Iš viso programa užtruko: " << std::right << std::setw(10) << std::to_string(p2.elapsed()) + "s" << endl;
                     cout << "----------------------------------------------------" << endl;
                     cout << endl;
+                }
+                double vidutinisLaikas = p.elapsed() / (double)kartai;
+                cout << endl;
+                cout << std::left << std::setw(60) << "Iš viso vidutiniškai programa užtruko: " << std::right << std::setw(10) << std::to_string(vidutinisLaikas) + "s" << endl;
                 break;
                 }
 
