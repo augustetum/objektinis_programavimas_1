@@ -145,8 +145,10 @@ int main(){
                         string fail = pasirinktiFaila();
                         nuskaitytiFaila(fail, studentuSarasas);
                     } catch (const char* e){
-                        cout << "Nuskaitymas nepavyko" << endl;
+                        cout << "Nuskaitymas nepavyko. " << e << endl;
                         break;
+                    } catch (const std::runtime_error e){
+                        cout << e.what();
                     }
 
                     while (true){
