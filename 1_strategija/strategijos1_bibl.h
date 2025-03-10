@@ -1,5 +1,4 @@
 #include <list>;
-#include "mano_lib.h";
 using std::deque;
 using std::list;
 
@@ -53,4 +52,60 @@ void nuskaitytiFailaT(string fail, Container &studentuSarasas){
 
                 studentuSarasas.push_back(stud);
             }
+}
+
+template <typename Container>
+void rikiuotiPagalVardaT(Container &studentuSarasas){
+    if constexpr (std::is_same_v<Container, std::list<Studentas>>) {
+        studentuSarasas.sort([](const Studentas &a, const Studentas &b) {
+            return a.vardas < b.vardas;
+        });
+    } else {
+        sort(studentuSarasas.begin(), studentuSarasas.end(), [](const Studentas& a, const Studentas& b) {
+            return a.vardas < b.vardas;
+        });
+
+    }
+}
+
+template <typename Container>
+void rikiuotiPagalPavardeT(Container &studentuSarasas){
+    if constexpr (std::is_same_v<Container, std::list<Studentas>>) {
+        studentuSarasas.sort([](const Studentas &a, const Studentas &b) {
+            return a.pavarde < b.pavarde;
+        });
+    } else {
+        sort(studentuSarasas.begin(), studentuSarasas.end(), [](const Studentas& a, const Studentas& b) {
+            return a.pavarde < b.pavarde;
+        });
+
+    }
+}
+
+template <typename Container>
+void rikiuotiPagalGalutiniMedT(Container &studentuSarasas){
+    if constexpr (std::is_same_v<Container, std::list<Studentas>>) {
+        studentuSarasas.sort([](const Studentas &a, const Studentas &b) {
+            return a.galutinisMed < b.galutinisMed;
+        });
+    } else {
+        sort(studentuSarasas.begin(), studentuSarasas.end(), [](const Studentas& a, const Studentas& b) {
+            return a.galutinisMed < b.galutinisMed;
+        });
+
+    }
+}
+
+template <typename Container>
+void rikiuotiPagalGalutiniVidT(Container &studentuSarasas){
+    if constexpr (std::is_same_v<Container, std::list<Studentas>>) {
+        studentuSarasas.sort([](const Studentas &a, const Studentas &b) {
+            return a.galutinisVid < b.galutinisVid;
+        });
+    } else {
+        sort(studentuSarasas.begin(), studentuSarasas.end(), [](const Studentas& a, const Studentas& b) {
+            return a.galutinisVid < b.galutinisVid;
+        });
+
+    }
 }
