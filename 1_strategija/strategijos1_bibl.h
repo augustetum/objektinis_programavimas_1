@@ -117,7 +117,6 @@ void rikiuotiPagalGalutiniVidT(Container &studentuSarasas){
 
 template <typename Container>
 void skirstytiStudentusSuTaisPaciaisKonteineriaisT(Container &studentuSarasas){
-    Timer t;
     Container nepazangus;
     Container pazangus;
     for(Studentas s : studentuSarasas){
@@ -136,8 +135,28 @@ void skirstytiStudentusSuTaisPaciaisKonteineriaisT(Container &studentuSarasas){
 }
 
 template <typename Container>
+void skirstytiStudentusSuVienuKonteineriuT(Container &studentuSarasas){
+    Container nepazangus;
+    auto it = studentuSarasas.begin();
+
+    while (it != studentuSarasas.end()){
+        if (it->galutinisVid < 5){
+            nepazangus.push_back(*it);
+            it = studentuSarasas.erase(it);
+        } else {
+            ++it;
+        }
+    }
+
+    if constexpr(std::is_same_v<Container, vector<Studentas>> || std::is_same_v<Container, deque<Studentas>>){
+        nepazangus.shrink_to_fit();
+    }
+    isvestiDuFailusT(nepazangus, studentuSarasas);
+}
+
+
+template <typename Container>
 void isvestiDuFailusT(Container grupe1, Container grupe2){
-    Timer v;
     std::ostringstream buferis;
     buferis << std::left << std::setw(20) << "Pavardė" << std::setw(20) << "Vardas" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Vid.)" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Med.)" << endl;
     for (Studentas s: grupe1){
@@ -161,3 +180,4 @@ void isvestiDuFailusT(Container grupe1, Container grupe2){
 }
 
 #endif
+
