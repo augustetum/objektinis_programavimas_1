@@ -50,8 +50,25 @@ int main(){
         skirstytiStudentusSuTaisPaciaisKonteineriaisT(studentaiV);
         vektoriuTrukme += v.elapsed();
         studentaiV.clear();
+
+        d.reset();
+        nuskaitytiFailaT(failas, studentaiD);
+        if (rikiavimas == 1) {
+            rikiuotiPagalVardaT(studentaiD);
+        } else if (rikiavimas == 2) {
+            rikiuotiPagalPavardeT(studentaiD);
+        } else if (rikiavimas == 3) {
+            rikiuotiPagalGalutiniVidT(studentaiD);
+        } else if (rikiavimas == 4) {
+            rikiuotiPagalGalutiniMedT(studentaiD);
+        } 
+        skirstytiStudentusSuTaisPaciaisKonteineriaisT(studentaiD);
+        dequeTrukme += d.elapsed();
+        studentaiD.clear();
+
     }
 
-    cout << "Programa su vektoriais vidutiniškai užtruko: " << vektoriuTrukme / (double)kartai << endl;
+    cout << "Programa su vektoriais (vector) vidutiniškai užtruko: " << vektoriuTrukme / (double)kartai << endl;
+    cout << "Programa su dėklais (deque) vidutiniškai užtruko: " << dequeTrukme / (double)kartai << endl;
 }
 
