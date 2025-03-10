@@ -174,7 +174,7 @@ string pasirinktiFaila(){
 
     while(true){
         try{
-            system("ls *.txt > temp.txt");
+            system("ls *.txt gen_failu_archyvas/*.txt > temp.txt");
             ifstream tempFail("temp.txt");
             vector<string> failuPav;
             std::unordered_set<string> nenorimiFailai = {"studentuRezultatai.txt", "firstNames.txt", "lastNames.txt"};
@@ -407,10 +407,12 @@ void skirstytiStudentus(vector<Studentas> &studentuSarasas){
         if (s.galutinisVid < 5){
             nepazangus.push_back(s);
         } else if (s.galutinisVid >= 5){
-            pazangus
-            .push_back(s);
+            pazangus.push_back(s);
         }
     }
+    pazangus.shrink_to_fit();
+    nepazangus.shrink_to_fit();
+    
     cout << std::left << std::setw(60) << "Studentų skirstymas į dvi grupes užtruko: " << std::right << std::setw(10) << std::to_string(t.elapsed()) + "s" << endl;
     studentuSarasas.clear();
     isvestiDuFailus(nepazangus, pazangus);

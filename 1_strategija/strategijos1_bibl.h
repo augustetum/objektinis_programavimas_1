@@ -127,8 +127,6 @@ void skirstytiStudentusSuTaisPaciaisKonteineriaisT(Container &studentuSarasas){
             pazangus.push_back(s);
         }
     }
-    
-    cout << std::left << std::setw(60) << "Studentų skirstymas į dvi grupes užtruko: " << std::right << std::setw(10) << std::to_string(t.elapsed()) + "s" << endl;
     isvestiDuFailusT(nepazangus, pazangus);
 }
 
@@ -143,7 +141,6 @@ void isvestiDuFailusT(Container grupe1, Container grupe2){
     std::ofstream failas1("nepazangus.txt");
     failas1 << buferis.str();
     failas1.close();
-    cout << std::left << std::setw(60) << "Nepažangių mokinių failą išvesti užtruko: " << std::right << std::setw(10) << std::to_string(v.elapsed()) + "s" << endl;
 
     Timer k;
     std::ostringstream buferis2;
@@ -155,8 +152,6 @@ void isvestiDuFailusT(Container grupe1, Container grupe2){
         std::ofstream failas2("pazangus.txt");
         failas2 << buferis2.str();
         failas2.close();
-
-    cout << std::left << std::setw(60) << "Pažangių mokinių failą išvesti užtruko: " << std::right << std::setw(10) << std::to_string(k.elapsed()) + "s" << endl;
 
 }
 
