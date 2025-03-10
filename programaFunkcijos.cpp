@@ -177,7 +177,7 @@ string pasirinktiFaila(){
             system("ls *.txt gen_failu_archyvas/*.txt > temp.txt");
             ifstream tempFail("temp.txt");
             vector<string> failuPav;
-            std::unordered_set<string> nenorimiFailai = {"studentuRezultatai.txt", "firstNames.txt", "lastNames.txt"};
+            std::unordered_set<string> nenorimiFailai = {"studentuRezultatai.txt", "firstNames.txt", "lastNames.txt", "nepazangus.txt", "pazangus.txt"};
             string failoPav;
             while(getline(tempFail, failoPav)){
                 if (nenorimiFailai.find(failoPav) == nenorimiFailai.end()) {
