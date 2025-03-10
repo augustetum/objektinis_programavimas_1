@@ -1,3 +1,6 @@
+#ifndef MANO_LIB_H
+#define MANO_LIB_H
+
 #include <iostream>
 #include <iomanip>
 #include <vector>
@@ -51,3 +54,5 @@ void skirstytiStudentus(vector<Studentas> &studentuSarasas);
 bool vardoTikrinimas(const string &vard);
 void isvestiDuFailus(vector<Studentas> grupe1, vector<Studentas> grupe2);
 void rikiavimasIrIrasymasVargsiukamsIrKietekams(vector<Studentas> vargsiukai, vector<Studentas> kietekai);
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef TIMER_H
+#define TIMER_H
+
 #include <chrono>
 
 class Timer {
@@ -11,3 +14,5 @@ class Timer {
     double elapsed() const {return std::chrono::duration<double>(std::chrono::high_resolution_clock::now() - start).count();
     }
 };
+
+#endif 
