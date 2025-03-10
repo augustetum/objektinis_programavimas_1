@@ -1,5 +1,5 @@
 #include "../mano_lib.h"
-#include "strategijos1_bibl.h"
+#include "strategijos_bibl.h"
 
 
 int main(){
@@ -46,9 +46,6 @@ int main(){
         } 
         skirstytiStudentusSuVienuKonteineriuT(studentaiV);
         vektoriuTrukme += v.elapsed();
-        if (x==0){
-             rodytiVisusRezultatus(studentaiV);
-        }
         studentaiV.clear();
 
         d.reset();

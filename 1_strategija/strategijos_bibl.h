@@ -151,9 +151,9 @@ void skirstytiStudentusSuVienuKonteineriuT(Container &studentuSarasas){
     if constexpr(std::is_same_v<Container, vector<Studentas>> || std::is_same_v<Container, deque<Studentas>>){
         nepazangus.shrink_to_fit();
     }
+    studentuSarasas.clear();
     isvestiDuFailusT(nepazangus, studentuSarasas);
 }
-
 
 template <typename Container>
 void isvestiDuFailusT(Container grupe1, Container grupe2){

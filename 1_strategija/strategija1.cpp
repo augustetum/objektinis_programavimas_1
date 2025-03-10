@@ -1,5 +1,5 @@
 #include "../mano_lib.h"
-#include "strategijos1_bibl.h"
+#include "strategijos_bibl.h"
 // 1 strategija: Bendro studentai konteinerio (vector, list ir deque tipų) skaidymas (rūšiavimas) 
 // į du naujus to paties tipo konteinerius: "vargšiukų" ir "kietiakų". Tokiu būdu tas pats studentas 
 // yra dvejuose konteineriuose: bendrame studentai ir viename iš suskaidytų (vargšiukai arba kietiakai). 
