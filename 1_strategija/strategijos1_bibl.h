@@ -127,6 +127,8 @@ void skirstytiStudentusSuTaisPaciaisKonteineriaisT(Container &studentuSarasas){
             pazangus.push_back(s);
         }
     }
+    nepazangus.shrink_to_fit();
+    pazangus.shrink_to_fit();
     isvestiDuFailusT(nepazangus, pazangus);
 }
 
@@ -149,9 +151,9 @@ void isvestiDuFailusT(Container grupe1, Container grupe2){
         buferis2 << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisVid << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisMed << endl;
     }
 
-        std::ofstream failas2("pazangus.txt");
-        failas2 << buferis2.str();
-        failas2.close();
+    std::ofstream failas2("pazangus.txt");
+    failas2 << buferis2.str();
+    failas2.close();
 
 }
 

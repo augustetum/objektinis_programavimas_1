@@ -12,7 +12,9 @@ int main(){
     vector<Studentas> studentaiV;
     deque<Studentas> studentaiD;
     list<Studentas> studentaiL;
+
     string failas = pasirinktiFaila();
+
     int rikiavimas;
     cout << "Pasirinkite failo rikiavimo būdą: " << endl;
     cout << "1 | Rikiuoti pagal vardą" << endl;
@@ -21,20 +23,35 @@ int main(){
     cout << "4 | Rikiuoti pagal galutinį pažymį (su mediana)" << endl;
     cin >> rikiavimas;
 
+    int kartai;
+    cout << "Kiek kartų norite testuoti programą su skirtingais konteineriais?" << endl;
+    cin >> kartai;
+
+    double vektoriuTrukme;
+    double dequeTrukme;
+    double listTrukme;
     Timer v;
-    // vector testavimas
-    nuskaitytiFailaT(failas, studentaiV);
-    if (rikiavimas == 1) {
-        rikiuotiPagalVarda(studentaiV);
-    } else if (rikiavimas == 2) {
-        rikiuotiPagalPavarde(studentaiV);
-    } else if (rikiavimas == 3) {
-        rikiuotiPagalGalutiniVid(studentaiV);
-    } else if (rikiavimas == 4) {
-        rikiuotiPagalGalutiniMed(studentaiV);
-    } 
-    skirstytiStudentusSuTaisPaciaisKonteineriaisT(studentaiV);
-    cout << "Programa užtruko: " << v.elapsed() << "s\n";
+    Timer d;
+    Timer l;
 
+    for (int x = 0; x < kartai; x++){
+        //vektoriaus testavimas
+        v.reset();
+        nuskaitytiFailaT(failas, studentaiV);
+        if (rikiavimas == 1) {
+            rikiuotiPagalVardaT(studentaiV);
+        } else if (rikiavimas == 2) {
+            rikiuotiPagalPavardeT(studentaiV);
+        } else if (rikiavimas == 3) {
+            rikiuotiPagalGalutiniVidT(studentaiV);
+        } else if (rikiavimas == 4) {
+            rikiuotiPagalGalutiniMedT(studentaiV);
+        } 
+        skirstytiStudentusSuTaisPaciaisKonteineriaisT(studentaiV);
+        vektoriuTrukme += v.elapsed();
+        studentaiV.clear();
+    }
 
+    cout << "Programa su vektoriais vidutiniškai užtruko: " << vektoriuTrukme / (double)kartai << endl;
 }
+
