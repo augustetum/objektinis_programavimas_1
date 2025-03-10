@@ -9,6 +9,7 @@
 
 int main(){
     cout << "Konteinerių testavimo programa | 1 strategija" << endl;
+    cout << "---------------------------------------------" << endl;
     vector<Studentas> studentaiV;
     deque<Studentas> studentaiD;
     list<Studentas> studentaiL;
@@ -66,9 +67,25 @@ int main(){
         dequeTrukme += d.elapsed();
         studentaiD.clear();
 
+        l.reset();
+        nuskaitytiFailaT(failas, studentaiL);
+        if (rikiavimas == 1) {
+            rikiuotiPagalVardaT(studentaiL);
+        } else if (rikiavimas == 2) {
+            rikiuotiPagalPavardeT(studentaiL);
+        } else if (rikiavimas == 3) {
+            rikiuotiPagalGalutiniVidT(studentaiL);
+        } else if (rikiavimas == 4) {
+            rikiuotiPagalGalutiniMedT(studentaiL);
+        } 
+        skirstytiStudentusSuTaisPaciaisKonteineriaisT(studentaiL);
+        listTrukme += l.elapsed();
+        studentaiL.clear();
     }
-
-    cout << "Programa su vektoriais (vector) vidutiniškai užtruko: " << vektoriuTrukme / (double)kartai << endl;
-    cout << "Programa su dėklais (deque) vidutiniškai užtruko: " << dequeTrukme / (double)kartai << endl;
+    cout << "--------------------------------------------------------------------" << endl;
+    cout << "Programa su vektoriais (vector) vidutiniškai užtruko: " << vektoriuTrukme / (double)kartai << "s\n";
+    cout << "Programa su dėklais (deque) vidutiniškai užtruko: " << dequeTrukme / (double)kartai << "s\n";
+    cout << "Programa su sąrašais (list) vidutiniškai užtruko: " << listTrukme / (double)kartai << "s\n";
+    cout << "--------------------------------------------------------------------" << endl;
 }
 

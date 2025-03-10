@@ -127,8 +127,11 @@ void skirstytiStudentusSuTaisPaciaisKonteineriaisT(Container &studentuSarasas){
             pazangus.push_back(s);
         }
     }
-    nepazangus.shrink_to_fit();
-    pazangus.shrink_to_fit();
+
+    if constexpr(std::is_same_v<Container, vector<Studentas>> || std::is_same_v<Container, deque<Studentas>>){
+        nepazangus.shrink_to_fit();
+        pazangus.shrink_to_fit();
+    }
     isvestiDuFailusT(nepazangus, pazangus);
 }
 
