@@ -9,9 +9,10 @@ int main(){
     string failas;
     failas = pasirinktiFaila();
 
-    Timer v;
-    Timer d;
-    Timer l;
+    Timer v, d, l; //bendram laikui
+    Timer nV, nD, nL; //nuskaitymui
+    Timer rV, rD, rL; //rikiavimui
+    Timer sV, sD, sL; //skirstymui
 
     double trukmeV = 0.0;
     double trukmeD = 0.0;
@@ -32,14 +33,31 @@ int main(){
     cout << "Tyrimas | Konteinerių skirtumai" << endl;
     for (int i = 0; i < 3; i++){
         v.reset();
+
+        nV.reset();
         nuskaitytiFailaT(failas, studentuSarasasV);
+        nuskaitymoTrukmeV += nV.elapsed();
+
+        rV.reset();
         rikiuotiPagalGalutiniVidT(studentuSarasasV);
+        rikiavimoTrukmeV += rV.elapsed();
+
+        sV.reset();
         skirstytiStudentus(studentuSarasasV);
+        skirstymoTrukmeV += sV.elapsed();
+
         trukmeV += v.elapsed();
-
-
     }
-    
+
+
+
+    cout << "-----------Vektoriai-----------" << endl;
+    cout << "Failo nuskaitymas: " << nuskaitymoTrukmeV / 3.0 << "s\n";
+    cout << "Rikiavimas: " << rikiavimoTrukmeV / 3.0 << "s\n";
+    cout << "Skirstymas: " << skirstymoTrukmeV / 3.0 << "s\n";
+    cout << "Iš viso: " << trukmeV / 3.0 << "s\n";
+
+     
 
 
 }
