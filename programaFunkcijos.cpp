@@ -400,7 +400,7 @@ bool vardoTikrinimas(const string &vard){
 }
 
 void skirstytiStudentus(vector<Studentas> &studentuSarasas){
-    Timer t;
+   // Timer t;
     vector<Studentas> nepazangus;
     vector<Studentas> pazangus;
     for(Studentas s : studentuSarasas){
@@ -413,9 +413,9 @@ void skirstytiStudentus(vector<Studentas> &studentuSarasas){
     pazangus.shrink_to_fit();
     nepazangus.shrink_to_fit();
     
-    cout << std::left << std::setw(60) << "Studentų skirstymas į dvi grupes užtruko: " << std::right << std::setw(10) << std::to_string(t.elapsed()) + "s" << endl;
+   // cout << std::left << std::setw(60) << "Studentų skirstymas į dvi grupes užtruko: " << std::right << std::setw(10) << std::to_string(t.elapsed()) + "s" << endl;
     studentuSarasas.clear();
-    isvestiDuFailus(nepazangus, pazangus);
+   // isvestiDuFailus(nepazangus, pazangus);
 }
 
 void isvestiDuFailus(vector<Studentas> grupe1, vector<Studentas> grupe2){
