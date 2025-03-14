@@ -178,5 +178,24 @@ void isvestiDuFailusT(Container grupe1, Container grupe2){
 
 }
 
+template <typename Container>
+void skirstytiStudentusT(Container &studentuSarasas){
+    Container nepazangus;
+    Container pazangus;
+    for(Studentas s : studentuSarasas){
+        if (s.galutinisVid < 5){
+            nepazangus.push_back(s);
+        } else if (s.galutinisVid >= 5){
+            pazangus.push_back(s);
+        }
+    }
+
+    if constexpr(std::is_same_v<Container, vector<Studentas>> || std::is_same_v<Container, deque<Studentas>>){
+        nepazangus.shrink_to_fit();
+        pazangus.shrink_to_fit();
+    }
+    studentuSarasas.clear();
+    isvestiDuFailusT(nepazangus, pazangus);
+}
 #endif
 
