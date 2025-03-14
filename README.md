@@ -1,50 +1,28 @@
 # objektinis_programavimas_1
 
-| Studentų kiekis faile | Failo sukūrimo laikas |
-| --------------------- | --------------------- |
-| 1000 | 0.00935596s |
-| 10000 | 0.0373938s | 
-| 100000 | 0.309885s |
-| 1000000 | 1.08236s |
-| 10000000 | 35.0126s |
+Konteinerių tyrimas 
 
-
-Vidutiniai studentų failų tyrimo rezultatai (trys iteracijos)
-
-| Studentų kiekis faile | Nuskaitymas | Rikiavimas (pagal vidurkį) | Skirstymas į dvi grupes | Nepažangių mokinių f. | Pažangių mokinių f. | Programos veikimas |
-| --------------------- | ----------- | -------------------------- | ----------------------- | --------------------- | ------------------- | ------------------ |
-| 1000 | 0.012603 | 0.000197 | 0.000282 | 0.001833 | 0.001679 | 0.017453 |
-| 10000 | 0.048054 | 0.000857 | 0.001647 | 0.009054 | 0.01032 | 0.073480 |
-| 100000 | 0.415821 | 0.008138 | 0.017146 | 0.060400 | 0.086110 | 0.621708 |
-| 1000000 | 1.644939 | 0.077956 | 0.204204 | 0.626222 | 0.925873 | 3.871331 |
-| 10000000 | 53.674973 | 0.675021 | 1.948356 | 3.988636 | 5.840717 | 70.340959 |
-
-Failų sukūrimo nuotraukos:
-
-<img width="316" alt="Screenshot 2025-03-07 at 08 45 18" src="https://github.com/user-attachments/assets/3a4b996a-fb31-430f-810c-f9dd62714d99" />
-
-
-
-
-<img width="308" alt="Screenshot 2025-03-07 at 08 47 47" src="https://github.com/user-attachments/assets/64ad9722-9ac5-4daf-b883-f6761328f0bf" />
-
-
-
-
-
-<img width="295" alt="Screenshot 2025-03-07 at 08 48 21" src="https://github.com/user-attachments/assets/d62798d6-9725-4817-a086-037da5db599f" />
-
-
-
-
-
-<img width="289" alt="Screenshot 2025-03-07 at 08 49 47" src="https://github.com/user-attachments/assets/66fd1892-8d2c-46a9-866c-3fca736db592" />
-
-
-
-
-
-<img width="288" alt="Screenshot 2025-03-07 at 08 50 47" src="https://github.com/user-attachments/assets/0fc5acd1-7082-4849-82db-432e87054b93" />
+| Studentų kiekis faile | Konteinerio tipas | Failo nuskaitymas | Rikiavimas | Skirstymas | Programos veikimas |
+| --------- | ----------------- | ----------------- | ---------- | ---------- | ------------------ |
+| 1000 | Vektoriai (vectors) | 0.00654578s | 7.24307e-05s | 0.00132085s | 0.00793914s |
+| 1000 |  Dvipusė eilė (deque) | 0.00616018s | 8.6486e-05s | 0.00107772s | 0.00732449s |
+| 1000 | Sąrašai (list) | 0.0058434s | 5.9694e-05s | 0.00142793s | 0.00733115s |
+| |
+| 10 000 | Vektoriai (vectors) | 0.0338688s | 0.000466028s | 0.00966726s | 0.0440022s |
+| 10 000 |  Dvipusė eilė (deque) | 0.0339212s | 0.000529736s | 0.008725s | 0.0431759s |
+| 10 000 | Sąrašai (list) | 0.0339323s | 0.000741709s | 0.0104051s | 0.0450791s |
+| |
+| 100 000 | Vektoriai (vectors) | 0.400789s | 0.0053029s | 0.137764s | 0.543856s |
+| 100 000 | Dvipusė eilė (deque) | 0.399359s | 0.00520086s | 0.10217s | 0.506729s |
+| 100 000 | Sąrašai (list) | 0.396128s | 0.0176462s | 0.131789s | 0.545564s | 
+| |
+| 1 000 000 | Vektoriai (vectors) | 1.60673s | 0.0425555s | 0.849124s | 2.49841s |
+| 1 000 000 | Dvipusė eilė (deque) | 1.69874s | 0.056697s | 0.955653s | 2.71109s |
+| 1 000 000 | Sąrašai (list) | 1.66162s | 0.527589s | 1.32249s | 3.5117s |
+| |
+| 10 000 000 | Vektoriai (vectors) | 56.5568s | 0.765428s | 16.9947s | 74.3169s |
+| 10 000 000 | Dvipusė eilė (deque) | 53.5321s | 0.796377s | 15.8749s | 70.2034s |
+| 10 000 000 | Sąrašai (list) | 53.4425s | 9.82805s | 25.8748s | 89.1454s | 
 
 
 

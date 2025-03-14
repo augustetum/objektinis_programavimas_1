@@ -106,7 +106,7 @@ int main(){
     cout << "Iš viso: " << trukmeV / 3.0 << "s\n";
     cout << endl;
 
-    cout << "----------- Dėklai (deque) -----------" << endl;
+    cout << "----------- Dvipusė eilė (deque) -----------" << endl;
     cout << "Failo nuskaitymas: " << nuskaitymoTrukmeD / 3.0 << "s\n";
     cout << "Rikiavimas: " << rikiavimoTrukmeD / 3.0 << "s\n";
     cout << "Skirstymas: " << skirstymoTrukmeD / 3.0 << "s\n";
