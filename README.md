@@ -1,6 +1,15 @@
 # objektinis_programavimas_1
 
-Konteinerių tyrimas 
+
+
+| Testuojamos sistemos parametrai |  |
+| -------------------------------- | - |
+| CPU | Apple M1 |
+| RAM | 8GB, 8 core |
+| SSD | 256GB | 
+
+
+<h2>Konteinerių tyrimas</h2>
 
 | Studentų kiekis faile | Konteinerio tipas | Failo nuskaitymas | Rikiavimas | Skirstymas | Programos veikimas |
 | --------- | ----------------- | ----------------- | ---------- | ---------- | ------------------ |
