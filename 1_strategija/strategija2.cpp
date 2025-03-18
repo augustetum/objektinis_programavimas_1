@@ -44,7 +44,7 @@ int main(){
         } else if (rikiavimas == 4) {
             rikiuotiPagalGalutiniMedT(studentaiV);
         } 
-        skirstytiStudentusSuVienuKonteineriuT(studentaiV);
+        skirstytiStudentusSuVienuKonteineriuT(studentaiV, rikiavimas);
         vektoriuTrukme += v.elapsed();
         studentaiV.clear();
 
@@ -59,22 +59,13 @@ int main(){
         } else if (rikiavimas == 4) {
             rikiuotiPagalGalutiniMedT(studentaiD);
         } 
-        skirstytiStudentusSuVienuKonteineriuT(studentaiD);
+        skirstytiStudentusSuVienuKonteineriuT(studentaiD, rikiavimas);
         dequeTrukme += d.elapsed();
         studentaiD.clear();
 
         l.reset();
         nuskaitytiFailaT(failas, studentaiL);
-        if (rikiavimas == 1) {
-            rikiuotiPagalVardaT(studentaiL);
-        } else if (rikiavimas == 2) {
-            rikiuotiPagalPavardeT(studentaiL);
-        } else if (rikiavimas == 3) {
-            rikiuotiPagalGalutiniVidT(studentaiL);
-        } else if (rikiavimas == 4) {
-            rikiuotiPagalGalutiniMedT(studentaiL);
-        } 
-        skirstytiStudentusSuVienuKonteineriuT(studentaiL);
+        skirstytiStudentusSuVienuKonteineriuT(studentaiL, rikiavimas);
         listTrukme += l.elapsed();
         studentaiL.clear();
     }

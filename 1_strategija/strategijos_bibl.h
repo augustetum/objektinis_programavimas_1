@@ -105,11 +105,11 @@ template <typename Container>
 void rikiuotiPagalGalutiniVidT(Container &studentuSarasas){
     if constexpr (std::is_same_v<Container, std::list<Studentas>>) {
         studentuSarasas.sort([](const Studentas &a, const Studentas &b) {
-            return a.galutinisVid < b.galutinisVid;
+            return a.galutinisVid > b.galutinisVid;
         });
     } else {
         sort(studentuSarasas.begin(), studentuSarasas.end(), [](const Studentas& a, const Studentas& b) {
-            return a.galutinisVid < b.galutinisVid;
+            return a.galutinisVid > b.galutinisVid;
         });
 
     }
@@ -135,22 +135,34 @@ void skirstytiStudentusSuTaisPaciaisKonteineriaisT(Container &studentuSarasas){
 }
 
 template <typename Container>
-void skirstytiStudentusSuVienuKonteineriuT(Container &studentuSarasas){
+void skirstytiStudentusSuVienuKonteineriuT(Container &studentuSarasas, int rikiavimas){
     Container nepazangus;
-    auto it = studentuSarasas.begin();
-
-    while (it != studentuSarasas.end()){
-        if (it->galutinisVid < 5){
-            nepazangus.push_back(*it);
-            it = studentuSarasas.erase(it);
-        } else {
-            ++it;
-        }
+    rikiuotiPagalGalutiniVidT(studentuSarasas);
+    while (studentuSarasas.back().galutinisVid < 5) {
+        nepazangus.push_back(studentuSarasas.back());
+        studentuSarasas.pop_back();
     }
 
     if constexpr(std::is_same_v<Container, vector<Studentas>> || std::is_same_v<Container, deque<Studentas>>){
+        studentuSarasas.shrink_to_fit();
         nepazangus.shrink_to_fit();
     }
+
+
+     if (rikiavimas == 1) {
+            rikiuotiPagalVardaT(studentuSarasas);
+            rikiuotiPagalVardaT(nepazangus);
+    } else if (rikiavimas == 2) {
+            rikiuotiPagalPavardeT(studentuSarasas);
+            rikiuotiPagalPavardeT(nepazangus);
+    } else if (rikiavimas == 3) {
+            rikiuotiPagalGalutiniVidT(studentuSarasas);
+            rikiuotiPagalGalutiniVidT(nepazangus);
+    } else if (rikiavimas == 4) {
+            rikiuotiPagalGalutiniMedT(studentuSarasas);
+            rikiuotiPagalGalutiniMedT(nepazangus);
+    } 
+
     isvestiDuFailusT(nepazangus, studentuSarasas);
 }
 
