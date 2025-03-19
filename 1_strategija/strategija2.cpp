@@ -69,7 +69,7 @@ int main(){
         listTrukme += l.elapsed();
         studentaiL.clear();
     }
-    cout << "--------------------------------------------------------------------" << endl;
+    cout << "----------------------------Rezultatai------------------------------" << endl;
     cout << "Programa su vektoriais (vector) vidutiniškai užtruko: " << vektoriuTrukme / (double)kartai << "s\n";
     cout << "Programa su dėklais (deque) vidutiniškai užtruko: " << dequeTrukme / (double)kartai << "s\n";
     cout << "Programa su sąrašais (list) vidutiniškai užtruko: " << listTrukme / (double)kartai << "s\n";

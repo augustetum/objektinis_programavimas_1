@@ -33,5 +33,27 @@
 | 10 000 000 | Dvipusė eilė (deque) | 53.5321s | 0.796377s | 15.8749s | 70.2034s |
 | 10 000 000 | Sąrašai (list) | 53.4425s | 9.82805s | 25.8748s | 89.1454s | 
 
+<h2>1 Strategija | Tyrimo rezultatai</h2>
+<p> Įvykdytos trys iteracijos, visose iteracijose pasirinktas rikiavimas pagal galutinį balą su vidurkiu</p>
 
-
+| Studentų kiekis faile | Konteinerio tipas | Programos veikimo laikas |
+| --------------------- | ------------------ | ------------ |
+| 1000 | Vektoriai (vectors) | 0.0171251s |
+| 1000 | Dvipusė eilė (deque) | 0.0129133s |
+| 1000 | Sąrašai (list) | 0.011015s |
+| |
+| 10 000 | Vektoriai (vectors) | 0.069089s |
+| 10 000 | Dvipusė eilė (deque) | 0.066101s |
+| 10 000 | Sąrašai (list) | 0.0670562s |
+| |
+| 100 000 | Vektoriai (vectors) | 0.715121s |
+| 100 000 | Dvipusė eilė (deque) | 0.788766s |
+| 100 000 | Sąrašai (list) | 0.77075s |
+| |
+| 1 000 000 | Vektoriai (vectors) | 4.19476s |
+| 1 000 000 | Dvipusė eilė (deque) | 4.62663s |
+| 1 000 000 | Sąrašai (list) | 5.77609s |
+| |
+| 10 000 000 | Vektoriai (vectors) | 78.007s | 
+| 10 000 000 | Dvipusė eilė (deque) | 69.4141s | 
+| 10 000 000 | Sąrašai (list) | 79.2014s |
