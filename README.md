@@ -63,22 +63,22 @@
 
 | Studentų kiekis faile | Konteinerio tipas | Programos veikimo laikas |
 | --------------------- | ------------------ | ------------ |
-| 1000 | Vektoriai (vectors) | 0.528222s |
-| 1000 | Dvipusė eilė (deque) | 0.00568061s |
-| 1000 | Sąrašai (list) | 0.00569997s |
+| 1000 | Vektoriai (vectors) | 0.020274s |
+| 1000 | Dvipusė eilė (deque) | 0.00809744s |
+| 1000 | Sąrašai (list) | 0.00756467s |
 | |
-| 10 000 | Vektoriai (vectors) | 0.0534517s |
-| 10 000 | Dvipusė eilė (deque) | 0.0414467s |
-| 10 000 | Sąrašai (list) | 0.0419948s |
+| 10 000 | Vektoriai (vectors) | 0.0565011s |
+| 10 000 | Dvipusė eilė (deque) | 0.0453732s |
+| 10 000 | Sąrašai (list) | 0.0445289s |
 | |
-| 100 000 | Vektoriai (vectors) | 0.484083s |
-| 100 000 | Dvipusė eilė (deque) | 0.464232s |
-| 100 000 | Sąrašai (list) | 0.501926s |
+| 100 000 | Vektoriai (vectors) | 0.507529s |
+| 100 000 | Dvipusė eilė (deque) | 0.483269s |
+| 100 000 | Sąrašai (list) | 0.514169s |
 | |
-| 1 000 000 | Vektoriai (vectors) | 2.30468s |
-| 1 000 000 | Dvipusė eilė (deque) | 2.61863s |
-| 1 000 000 | Sąrašai (list) | 3.29239s |
+| 1 000 000 | Vektoriai (vectors) | 2.38923s |
+| 1 000 000 | Dvipusė eilė (deque) | 2.50562s |
+| 1 000 000 | Sąrašai (list) | 3.43698s |
 | |
-| 10 000 000 | Vektoriai (vectors) | 70.4557s |
-| 10 000 000 | Dvipusė eilė (deque) | 69.6567s |
-| 10 000 000 | Sąrašai (list) | 88.3713s |
+| 10 000 000 | Vektoriai (vectors) | 69.5301s |
+| 10 000 000 | Dvipusė eilė (deque) | 68.4052s |
+| 10 000 000 | Sąrašai (list) | 88.9485s |

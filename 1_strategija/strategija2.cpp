@@ -32,7 +32,6 @@ int main(){
 
     for (int x = 0; x < kartai; x++){
 
-        //vektoriaus testavimas
         v.reset();
         nuskaitytiFailaT(failas, studentaiV);
         skirstytiStudentusSuVienuKonteineriuT(studentaiV, rikiavimas);
