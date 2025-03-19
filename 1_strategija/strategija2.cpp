@@ -35,30 +35,12 @@ int main(){
         //vektoriaus testavimas
         v.reset();
         nuskaitytiFailaT(failas, studentaiV);
-        if (rikiavimas == 1) {
-            rikiuotiPagalVardaT(studentaiV);
-        } else if (rikiavimas == 2) {
-            rikiuotiPagalPavardeT(studentaiV);
-        } else if (rikiavimas == 3) {
-            rikiuotiPagalGalutiniVidT(studentaiV);
-        } else if (rikiavimas == 4) {
-            rikiuotiPagalGalutiniMedT(studentaiV);
-        } 
         skirstytiStudentusSuVienuKonteineriuT(studentaiV, rikiavimas);
         vektoriuTrukme += v.elapsed();
         studentaiV.clear();
 
         d.reset();
         nuskaitytiFailaT(failas, studentaiD);
-        if (rikiavimas == 1) {
-            rikiuotiPagalVardaT(studentaiD);
-        } else if (rikiavimas == 2) {
-            rikiuotiPagalPavardeT(studentaiD);
-        } else if (rikiavimas == 3) {
-            rikiuotiPagalGalutiniVidT(studentaiD);
-        } else if (rikiavimas == 4) {
-            rikiuotiPagalGalutiniMedT(studentaiD);
-        } 
         skirstytiStudentusSuVienuKonteineriuT(studentaiD, rikiavimas);
         dequeTrukme += d.elapsed();
         studentaiD.clear();

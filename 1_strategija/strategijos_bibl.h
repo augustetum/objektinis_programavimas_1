@@ -149,7 +149,7 @@ void skirstytiStudentusSuVienuKonteineriuT(Container &studentuSarasas, int rikia
     }
 
 
-     if (rikiavimas == 1) {
+    if (rikiavimas == 1) {
             rikiuotiPagalVardaT(studentuSarasas);
             rikiuotiPagalVardaT(nepazangus);
     } else if (rikiavimas == 2) {
@@ -208,6 +208,32 @@ void skirstytiStudentusT(Container &studentuSarasas){
     }
     studentuSarasas.clear();
     isvestiDuFailusT(nepazangus, pazangus);
+}
+
+template <typename Container>
+void studentuSkirstymas3(Container &studentuSarasas, int rikiavimas){
+    auto it = std::partition(studentuSarasas.begin(), studentuSarasas.end(), [](const auto &studentas) { return studentas.galutinisVid >= 5; });
+    Container nepazangus(it, studentuSarasas.end());
+    studentuSarasas.erase(it, studentuSarasas.end());
+    studentuSarasas.shrink_to_fit();
+    nepazangus.shrink_to_fit();
+
+    if (rikiavimas == 1) {
+            rikiuotiPagalVardaT(studentuSarasas);
+            rikiuotiPagalVardaT(nepazangus);
+    } else if (rikiavimas == 2) {
+            rikiuotiPagalPavardeT(studentuSarasas);
+            rikiuotiPagalPavardeT(nepazangus);
+    } else if (rikiavimas == 3) {
+            rikiuotiPagalGalutiniVidT(studentuSarasas);
+            rikiuotiPagalGalutiniVidT(nepazangus);
+    } else if (rikiavimas == 4) {
+            rikiuotiPagalGalutiniMedT(studentuSarasas);
+            rikiuotiPagalGalutiniMedT(nepazangus);
+    } 
+
+    isvestiDuFailusT(nepazangus, studentuSarasas);
+
 }
 #endif
 
