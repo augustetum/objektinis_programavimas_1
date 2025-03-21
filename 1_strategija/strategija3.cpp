@@ -6,6 +6,8 @@ int main(){
     cout << "Konteinerių testavimo programa | 3 strategija" << endl;
     cout << "---------------------------------------------" << endl;
     vector<Studentas> studentaiV;
+    deque<Studentas> studentaiD;
+    list<Studentas> studentaiL;
 
     string failas = pasirinktiFaila();
 
@@ -22,18 +24,35 @@ int main(){
     cin >> kartai;
 
     double vektoriuTrukme;
+    double dequeTrukme;
+    double listTrukme;
     Timer v;
+    Timer d;
+    Timer l;
 
     for (int x = 0; x < kartai; x++){
 
-        //vektoriaus testavimas
         v.reset();
         nuskaitytiFailaT(failas, studentaiV);
         studentuSkirstymas3(studentaiV, rikiavimas);
         vektoriuTrukme += v.elapsed();
         studentaiV.clear();
+
+        d.reset();
+        nuskaitytiFailaT(failas, studentaiD);
+        studentuSkirstymas3(studentaiD, rikiavimas);
+        dequeTrukme += d.elapsed();
+        studentaiD.clear();
+
+        l.reset();
+        nuskaitytiFailaT(failas, studentaiL);
+        studentuSkirstymas3(studentaiL, rikiavimas);
+        listTrukme += l.elapsed();
+        studentaiL.clear();
     }
     cout << "----------------------------Rezultatai------------------------------" << endl;
     cout << "Programa su vektoriais (vector) vidutiniškai užtruko: " << vektoriuTrukme / (double)kartai << "s\n";
+    cout << "Programa su dėklais (deque) vidutiniškai užtruko: " << dequeTrukme / (double)kartai << "s\n";
+    cout << "Programa su sąrašais (list) vidutiniškai užtruko: " << listTrukme / (double)kartai << "s\n";
     cout << "--------------------------------------------------------------------" << endl;
 }

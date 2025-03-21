@@ -6,7 +6,7 @@ EXEC1 = 1strategija
 EXEC2 = 2strategija
 EXEC3 = 3strategija
 
-all: $(EXEC0) $(EXEC1) $(EXEC2)
+all: $(EXEC0) $(EXEC1) $(EXEC2) $(EXEC3)
 
 $(EXEC0): programaFunkcijos.o konteineriuTyrimas.o
 	$(CXX) $(CXXFLAGS) -o $(EXEC0) programaFunkcijos.o konteineriuTyrimas.o

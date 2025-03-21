@@ -3,6 +3,8 @@
 
 #include <list>
 #include "../mano_lib.h"
+#include <thread>
+#include <functional>
 
 using std::deque;
 using std::list;
@@ -167,30 +169,6 @@ void skirstytiStudentusSuVienuKonteineriuT(Container &studentuSarasas, int rikia
 }
 
 template <typename Container>
-void isvestiDuFailusT(Container grupe1, Container grupe2){
-    std::ostringstream buferis;
-    buferis << std::left << std::setw(20) << "Pavardė" << std::setw(20) << "Vardas" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Vid.)" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Med.)" << endl;
-    for (Studentas s: grupe1){
-        buferis << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisVid << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisMed << endl;
-    }
-    std::ofstream failas1("nepazangus.txt");
-    failas1 << buferis.str();
-    failas1.close();
-
-    Timer k;
-    std::ostringstream buferis2;
-    buferis2 << std::left << std::setw(20) << "Pavardė" << std::setw(20) << "Vardas" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Vid.)" << std::setw(20) << std::fixed << std::setprecision(2) << "Galutinis (Med.)" << endl;
-    for (Studentas s: grupe2){
-        buferis2 << std::left << std::setw(20) << s.pavarde << std::setw(20) << s.vardas << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisVid << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisMed << endl;
-    }
-
-    std::ofstream failas2("pazangus.txt");
-    failas2 << buferis2.str();
-    failas2.close();
-
-}
-
-template <typename Container>
 void skirstytiStudentusT(Container &studentuSarasas){
     Container nepazangus;
     Container pazangus;
@@ -207,33 +185,41 @@ void skirstytiStudentusT(Container &studentuSarasas){
         pazangus.shrink_to_fit();
     }
     studentuSarasas.clear();
-    isvestiDuFailusT(nepazangus, pazangus);
 }
 
 template <typename Container>
 void studentuSkirstymas3(Container &studentuSarasas, int rikiavimas){
     auto it = std::partition(studentuSarasas.begin(), studentuSarasas.end(), [](const auto &studentas) { return studentas.galutinisVid >= 5; });
-    Container nepazangus(it, studentuSarasas.end());
-    studentuSarasas.erase(it, studentuSarasas.end());
-    studentuSarasas.shrink_to_fit();
-    nepazangus.shrink_to_fit();
+    Container nepazangus;
+    nepazangus.assign(it, studentuSarasas.end());
+    studentuSarasas.resize(std::distance(studentuSarasas.begin(), it));
+
+    std::thread t1, t2;
 
     if (rikiavimas == 1) {
-            rikiuotiPagalVardaT(studentuSarasas);
-            rikiuotiPagalVardaT(nepazangus);
+        std::thread t1([&studentuSarasas]() { rikiuotiPagalVardaT(studentuSarasas); });
+        std::thread t2([&nepazangus]() { rikiuotiPagalVardaT(nepazangus); });
+        t1.join();
+        t2.join();
     } else if (rikiavimas == 2) {
-            rikiuotiPagalPavardeT(studentuSarasas);
-            rikiuotiPagalPavardeT(nepazangus);
+        std::thread t1([&studentuSarasas]() { rikiuotiPagalPavardeT(studentuSarasas); });
+        std::thread t2([&nepazangus]() { rikiuotiPagalPavardeT(nepazangus); });
+        t1.join();
+        t2.join();
     } else if (rikiavimas == 3) {
-            rikiuotiPagalGalutiniVidT(studentuSarasas);
-            rikiuotiPagalGalutiniVidT(nepazangus);
+        std::thread t1([&studentuSarasas]() { rikiuotiPagalGalutiniVidT(studentuSarasas); });
+        std::thread t2([&nepazangus]() { rikiuotiPagalGalutiniVidT(nepazangus); });
+        t1.join();
+        t2.join();
     } else if (rikiavimas == 4) {
-            rikiuotiPagalGalutiniMedT(studentuSarasas);
-            rikiuotiPagalGalutiniMedT(nepazangus);
+        std::thread t1([&studentuSarasas]() { rikiuotiPagalGalutiniMedT(studentuSarasas); });
+        std::thread t2([&nepazangus]() { rikiuotiPagalGalutiniMedT(nepazangus); });
+        t1.join();
+        t2.join();
     } 
-
-    isvestiDuFailusT(nepazangus, studentuSarasas);
-
+    
+    if (t1.joinable()) t1.join();
+    if (t2.joinable()) t2.join();
 }
 #endif
 

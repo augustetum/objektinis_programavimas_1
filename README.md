@@ -1,7 +1,5 @@
 # objektinis_programavimas_1
 
-
-
 | Testuojamos sistemos parametrai |  |
 | -------------------------------- | - |
 | CPU | Apple M1 |
@@ -33,6 +31,7 @@
 | 10 000 000 | Dvipusė eilė (deque) | 53.5321s | 0.796377s | 15.8749s | 70.2034s |
 | 10 000 000 | Sąrašai (list) | 53.4425s | 9.82805s | 25.8748s | 89.1454s | 
 
+
 <h2>1 Strategija | Tyrimo rezultatai</h2>
 <p> Įvykdytos trys iteracijos, visose iteracijose pasirinktas rikiavimas pagal galutinį balą su vidurkiu</p>
 
@@ -58,6 +57,7 @@
 | 10 000 000 | Dvipusė eilė (deque) | 69.4141s | 
 | 10 000 000 | Sąrašai (list) | 79.2014s |
 
+
 <h2>2 Strategija | Tyrimo rezultatai </h2>
 <p> Įvykdytos trys iteracijos, visose iteracijose pasirinktas rikiavimas pagal galutinį balą su vidurkiu</p>
 
@@ -82,3 +82,30 @@
 | 10 000 000 | Vektoriai (vectors) | 69.5301s |
 | 10 000 000 | Dvipusė eilė (deque) | 68.4052s |
 | 10 000 000 | Sąrašai (list) | 88.9485s |
+
+
+<h2>3 Strategija | Tyrimo rezultatai  </h2>
+<p> Įvykdytos trys iteracijos, visose iteracijose pasirinktas rikiavimas pagal galutinį balą su vidurkiu</p>
+
+| Studentų kiekis faile | Programos veikimo laikas |
+| --------------------- |  ------------ |
+| 1000 | Vektoriai (vectors) | 0.00832676s |
+| 1000 | Dvipusė eilė (deque) | 0.00677876s |
+| 1000 | Sąrašai (list) | 0.00626292s |
+| |
+| 10 000 | Vektoriai (vectors) | 0.0471794s |
+| 10 000 | Dvipusė eilė (deque) | 0.0363412s |
+| 10 000 | Sąrašai (list) | 0.0351442s |
+| |
+| 100 000 | Vektoriai (vectors) | 0.418547s |
+| 100 000 | Dvipusė eilė (deque) | 0.398046s |
+| 100 000 | Sąrašai (list) | 0.411272s |
+| |
+| 1 000 000 | Vektoriai (vectors) | 1.70978s |
+| 1 000 000 | Dvipusė eilė (deque) | 1.73145s |
+| 1 000 000 | Sąrašai (list) | 2.06093s |
+| |
+| 10 000 000 | Vektoriai (vectors) | 69.5301s |
+| 10 000 000 | Dvipusė eilė (deque) | 68.4052s |
+| 10 000 000 | Sąrašai (list) | 88.9485s |
+
