@@ -1,4 +1,48 @@
 # objektinis_programavimas_1
+<h2>Programos aprašymas</h2>
+<p>Programa yra skirta apdoroti studentus ir jų akademinių pasiekimų duomenis.</p>
+<h4><b> Pradinės programos funkcijos: </b> </h4>
+
+<ol>
+    <li>Įvesti visus studentų duomenis ranka</li>
+    <li>Įvesti studentų vardus, pavardes, atsitiktine tvarka generuoti pažymius</li>
+    <li>Atsitiktinai generuoti studentų vardus, pavardes ir pažymius</li>
+    <li>Nuskaityti duomenis iš failo</li>
+    <li>Atsitiktinai generuoti failą su studentų duomenimis</li>
+</ol>
+
+<p>Programoje taip pat pateiktos <b>trys strategijos</b>, skirtos testuoti skirtingų programos veikimo laiko priklausomybę nuo naudojamų konteinerių (<i>vector, list, deque</i>) skirstant studentus į pažangius ir nepažangius.  </p>
+
+<h4><b> Strategijų aprašymai: </b> </h4>
+<ol>
+    <li> Bendro studentų konteinerio (<i>vector, list ir deque tipų</i>) skaidymas (rūšiavimas) į du naujus <b>to paties tipo</b> konteinerius: pažangius ir nepažangius.</li>
+    <li> Bendro studentų konteinerio (<i>vector, list ir deque</i>) skaidymas (rūšiavimas) panaudojant tik nepažangių mokinių konteinerį. Tokiu būdu, jei studentas yra nepažangus, jis įkeliamas į nepažangiųjų konteinerį ir ištrinamas iš bendro studentų konteinerio. Atminties atveju ši strategija - efektyvesnė, tačiau dažni trynimai gali būti neefektyvūs tam tikro tipo konteineriams.</li>
+    <li>Bendro studentų konteinerio (<i>vector, list ir deque</i>) skaidymas (rūšiavimas) optimizuojant antrąją strategiją naudojant Standard Template Library (STL)</li>
+</ol>
+
+<p>Strategijų laiko tyrimų rezultatai pateikti žemiau. </p>
+
+<h2>Naudojimosi instrukcija</h2>
+<ol>
+    <li>Susiinstaliuoti <a href="https://gnuwin32.sourceforge.net/packages/make.htm">MAKE</a></li>
+    <li>Atsidaryti terminalą</li>
+    <li>Klonuoti programos repozitoriją</li>
+
+    git clone https://github.com/augustetum/objektinis_programavimas_1.git
+
+ <li>Terminale rašyti žemiau esančią komandą, norint paleisti konteinerių tyrimą
+ <pre><code>make runT</code></pre>
+ Terminale rašyti žemiau esančią komandą, norint paleisti 1 strategiją
+ <pre><code>make run1</code></pre></li>
+ Terminale rašyti žemiau esančią komandą, norint paleisti 2 strategiją
+ <pre><code>make run2</code></pre></li>
+  Terminale rašyti žemiau esančią komandą, norint paleisti 3 strategiją
+ <pre><code>make run3</code></pre></li>
+   Terminale rašyti žemiau esančią komandą, norint paleisti pradinę programą
+ <pre><code>make runP</code></pre></li>
+</ol>
+
+<h2>Tyrim rezultatai</h2>
 
 | Testuojamos sistemos parametrai |  |
 | -------------------------------- | - |
@@ -87,8 +131,8 @@
 <h2>3 Strategija | Tyrimo rezultatai  </h2>
 <p> Įvykdytos trys iteracijos, visose iteracijose pasirinktas rikiavimas pagal galutinį balą su vidurkiu</p>
 
-| Studentų kiekis faile | Programos veikimo laikas |
-| --------------------- |  ------------ |
+| Studentų kiekis faile | Konteinerio tipas | Programos veikimo laikas |
+| --------------------- |  ------------ | -------- |
 | 1000 | Vektoriai (vectors) | 0.00832676s |
 | 1000 | Dvipusė eilė (deque) | 0.00677876s |
 | 1000 | Sąrašai (list) | 0.00626292s |
@@ -105,7 +149,6 @@
 | 1 000 000 | Dvipusė eilė (deque) | 1.73145s |
 | 1 000 000 | Sąrašai (list) | 2.06093s |
 | |
-| 10 000 000 | Vektoriai (vectors) | 69.5301s |
-| 10 000 000 | Dvipusė eilė (deque) | 68.4052s |
-| 10 000 000 | Sąrašai (list) | 88.9485s |
-
+| 10 000 000 | Vektoriai (vectors) | 59.2562s |
+| 10 000 000 | Dvipusė eilė (deque) | 58.4033s |
+| 10 000 000 | Sąrašai (list) | 62.6438s |

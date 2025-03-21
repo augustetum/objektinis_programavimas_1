@@ -133,7 +133,6 @@ void skirstytiStudentusSuTaisPaciaisKonteineriaisT(Container &studentuSarasas){
         nepazangus.shrink_to_fit();
         pazangus.shrink_to_fit();
     }
-    isvestiDuFailusT(nepazangus, pazangus);
 }
 
 template <typename Container>
@@ -165,7 +164,6 @@ void skirstytiStudentusSuVienuKonteineriuT(Container &studentuSarasas, int rikia
             rikiuotiPagalGalutiniMedT(nepazangus);
     } 
 
-    isvestiDuFailusT(nepazangus, studentuSarasas);
 }
 
 template <typename Container>

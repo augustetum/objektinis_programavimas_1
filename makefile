@@ -5,8 +5,9 @@ EXEC0 = konteineriuTyrimas
 EXEC1 = 1strategija
 EXEC2 = 2strategija
 EXEC3 = 3strategija
+EXEC4 = programa
 
-all: $(EXEC0) $(EXEC1) $(EXEC2) $(EXEC3)
+all: $(EXEC0) $(EXEC1) $(EXEC2) $(EXEC3) $(EXEC4)
 
 $(EXEC0): programaFunkcijos.o konteineriuTyrimas.o
 	$(CXX) $(CXXFLAGS) -o $(EXEC0) programaFunkcijos.o konteineriuTyrimas.o
@@ -20,6 +21,9 @@ $(EXEC2): programaFunkcijos.o strategija2.o
 $(EXEC3): programaFunkcijos.o strategija3.o
 	$(CXX) $(CXXFLAGS) -o $(EXEC3) programaFunkcijos.o strategija3.o
 
+$(EXEC4): programaFunkcijos.o programa.o
+	$(CXX) $(CXXFLAGS) -o $(EXEC4) programaFunkcijos.o programa.o
+
 konteineriuTyrimas.o: 1_strategija/konteineriuTyrimas.cpp
 	$(CXX) $(CXXFLAGS) -c 1_strategija/konteineriuTyrimas.cpp -o konteineriuTyrimas.o
 
@@ -32,8 +36,11 @@ strategija2.o: 1_strategija/strategija2.cpp
 strategija3.o: 1_strategija/strategija3.cpp
 	$(CXX) $(CXXFLAGS) -c 1_strategija/strategija3.cpp -o strategija3.o
 
+programa.o: programa.cpp
+	$(CXX) $(CXXFLAGS) -c programa.cpp -o programa.o
+
 clean:
-	rm -f *.o $(EXEC0) $(EXEC1) $(EXEC2) $(EXEC3)
+	rm -f *.o $(EXEC0) $(EXEC1) $(EXEC2) $(EXEC3) $(EXEC4)
 
 runT: $(EXEC0)
 	./$(EXEC0)
@@ -46,3 +53,6 @@ run2: $(EXEC2)
 
 run3: $(EXEC3)
 	./$(EXEC3)
+
+runP: $(EXEC4)
+	./$(EXEC4)
