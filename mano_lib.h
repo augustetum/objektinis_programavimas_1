@@ -1,8 +1,19 @@
+#ifndef MANO_LIB_H
+#define MANO_LIB_H
+
 #include <iostream>
 #include <iomanip>
 #include <vector>
+#include <fstream>
 #include <string>
 #include <numeric>
+#include <ctime>
+#include <sstream>
+#include <chrono>
+#include <unordered_set>
+#include <limits>
+#include <ios>
+#include "timer.h"
 
 using std::cout;
 using std::cin;
@@ -10,30 +21,38 @@ using std::string;
 using std::vector;
 using std::endl;
 using std::accumulate;
+using std::ifstream;
+using std::istringstream;
 
 struct Studentas{
     string vardas, pavarde;
     vector<int> pazymiai;
     int egzaminas;
+    double galutinisMed, galutinisVid, pazymiuVidurkis;
+    void skaiciuotiGalutiniSuVidurkiu();
+    void skaiciuotiGalutiniSuMediana();
 };
 
-double skaiciuotiGalutiniSuVidurkiu(Studentas stud){
-    double sum = accumulate(stud.pazymiai.begin(), stud.pazymiai.end(),0);
-    double pazymiuVidurkis = sum / (double)stud.pazymiai.size();
-    double galutinis = 0.4 * pazymiuVidurkis + 0.6 * stud.egzaminas;
-    return galutinis;
-}
+void rodytiRezultatus(vector<Studentas> studentuSarasas);
+void generuotiPazymius(vector<Studentas> &studentuSarasas);
+void generuotiStudentus(vector<Studentas> &studentuSarasas);
+void generuotiFailus(int studentuSkaicius);
+string pasirinktiFaila();
+void nuskaitytiFaila(string fail, vector<Studentas> &studentuSarasas);
+void rodytiVisusRezultatus(vector<Studentas> studentuSarasas);
+void testuotiFailuNuskaityma(vector<Studentas> studentuSarasas, int kartai);
 
-double skaiciuotiGalutiniSuMediana(Studentas stud){
-    int n = stud.pazymiai.size();
-    int med = 1;
-    sort(stud.pazymiai.begin(), stud.pazymiai.end());
-    if ( n % 2 != 0){
-        med = (double)stud.pazymiai[n/2];
-    } else {
-        med = (double)(stud.pazymiai[(n-1)/2] + stud.pazymiai[n/2]) / 2.0;
-    }
+//rikiavimo funkcijos
+void rikiuotiPagalVarda(vector<Studentas> &studentuSarasas);
+void rikiuotiPagalPavarde(vector<Studentas> &studentuSarasas);
+void rikiuotiPagalGalutiniMed(vector<Studentas> &studentuSarasas);
+void rikiuotiPagalGalutiniVid(vector<Studentas> &studentuSarasas);
 
-    double galutinis = 0.4 * med + 0.6 * stud.egzaminas;
-    return galutinis;
-}
+void pasirinktiRikiavima(vector<Studentas> studentuSarasas);
+void skirstytiStudentus(vector<Studentas> &studentuSarasas);
+
+bool vardoTikrinimas(const string &vard);
+void isvestiDuFailus(vector<Studentas> grupe1, vector<Studentas> grupe2);
+void rikiavimasIrIrasymasVargsiukamsIrKietekams(vector<Studentas> vargsiukai, vector<Studentas> kietekai);
+
+#endif
